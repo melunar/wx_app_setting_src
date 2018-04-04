@@ -6,7 +6,18 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  computed: {
+    demo: function() {
+      //this.$store.dispatch("VUEX_DEMO", bool)
+      return this.$store.state.demo.vuex_demo
+    }
+  },
+  watch: {
+    "demo": function(val) {
+      console.log("this.$store.state.demo.vuex_demo = " + val)
+    }
+  }
 }
 </script>
 

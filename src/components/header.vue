@@ -1,7 +1,7 @@
 <template>
     <div class="page-header">
         <div class="navbar-left fl">
-            <span class="normal-btn"> 
+            <span class="normal-btn" @click="testVuexDispatch"> 
                 <i class="fa fa-angle-left btn-pre-icon" style="font-size: 20px;"></i>
                 <span class="btn-text">返回</span>
             </span>
@@ -53,6 +53,11 @@ export default {
     return {
       
     };
+  },
+  methods: {
+      testVuexDispatch: function() {
+          this.$store.dispatch("VUEX_DEMO", !this.$store.state.demo.vuex_demo)
+      }
   }
 }
 </script>
