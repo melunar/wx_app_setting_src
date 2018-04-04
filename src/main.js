@@ -25,9 +25,9 @@ var store = new Vuex.Store({
 Vue.prototype.$http = axios; */
 import httpTest from "./utils/service.js";
 
-httpTest.then(function(res) {
+/* httpTest.then(function(res) {
   console.log(res);
-});
+}); */
 
 /* eslint-disable no-new */
 window.vueInstance = new Vue({

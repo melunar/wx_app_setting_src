@@ -41,13 +41,13 @@ module.exports = {
     cssSourceMap: true,
     proxyTable: {
             //测试
-            '/gateway':{
+            /* '/gateway':{
             	target: 'http://192.168.60.205:9080',
               changeOrigin: true,//允许跨域 或者使用nginx代理实现跨域
             	pathRewrite: {
             		'^/gateway': '/'
             	}
-            }
+            } */
     } 
   },
 

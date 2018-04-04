@@ -69,7 +69,7 @@ export default {
         width: 100%;
         height: 50px;
         background-color: @pageHeaderColor;
-        cursor: pointer; 
+        cursor: pointer; overflow: hidden;
         .normal-btn {
             padding: 14px 15px;
             color: #fff;
