@@ -11,6 +11,14 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
+/* import axios from 'axios';
+Vue.prototype.$http = axios; */
+import httpTest from "./utils/service.js";
+
+httpTest.then(function(res) {
+  console.log(res);
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

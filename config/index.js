@@ -9,9 +9,7 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
-    proxyTable: {},
-
+    assetsPublicPath: '/',  
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 4002, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
@@ -40,7 +38,17 @@ module.exports = {
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
 
-    cssSourceMap: true
+    cssSourceMap: true,
+    proxyTable: {
+            //测试
+            '/gateway':{
+            	target: 'http://192.168.60.205:9080',
+              changeOrigin: true,//允许跨域 或者使用nginx代理实现跨域
+            	pathRewrite: {
+            		'^/gateway': '/'
+            	}
+            }
+    } 
   },
 
   build: {

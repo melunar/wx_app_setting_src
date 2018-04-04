@@ -1,0 +1,25 @@
+// 将设置放入此文件中以覆盖默认设置
+{
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "extensions.autoUpdate": false,
+    "editor.wordWrap": "on",
+    "editor.fontSize": 16,
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": false,
+        "suppressUpdateNotice": false,
+        "suppressWelcomeNotice": true
+    },
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorTheme": "Monokai Dimmed",
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    "files.autoSave": "off",
+    "files.associations": {
+        "*.vue": "vue"
+    }
+}
