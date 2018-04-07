@@ -1,6 +1,29 @@
 <template>
     <div class="page-manager">
-        page list
+        <div class="page-list-header">
+          <div class="plh-title">页面
+            <i class="plh-add fa fa-plus" @click="addNewPage"></i>
+          </div>
+        </div>
+
+        <div class="page-list-content">
+          <el-table :data="pageListArr" style="width: 100%;height:25">
+            <el-table-column prop="title" label="名称" width="170"></el-table-column>
+            <el-table-column prop="isHomePage" label="首页" width="50">
+              <template slot-scope="scope">
+                <span v-if="scope.row.isHomePage === true" 
+                  class="btn-set-home is-home" @click="setHomePage(scope.row,false)">是</span>
+                <span v-else class="btn-set-home not-home" @click="setHomePage(scope.row,true)">否</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <span class="btn-operate edit fa fa-edit" title="编辑" @click="editPage(scope.row)"></span>
+                <span class="btn-operate delete fa fa-trash" title="删除" @click="deletePage(scope.row)"></span>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
     </div>
 </template>
 
@@ -9,7 +32,9 @@ export default {
   name: "pageList",
   mixins: [],
   data: function() {
-    return {};
+    return {
+      pageListArr: []
+    };
   },
   components: {
     /*requireDemo: function (resolve) {
@@ -17,11 +42,64 @@ export default {
         }*/
   },
   created: function() {},
-  mounted: function() {},
+  mounted: function() {
+    this.getPageList();
+  },
   beforeDestroy: function() {},
   computed: {},
   watch: {},
-  methods: {}
+  methods: {
+    getPageList: function() {
+      this.pageListArr = [
+        {
+          //id是为了编辑、删除时进行添加
+          id: 0,
+          title: "首页",
+          isHomePage: true
+        },
+        {
+          id: 1,
+          title: "页面1",
+          isHomePage: false
+        },
+        {
+          id: 2,
+          title: "页面2",
+          isHomePage: false
+        }
+      ];
+    },
+    addNewPage: function() {
+      var newPageObj = {
+          id: new Date().getTime(),
+          title: "未命名页面",
+          isHomePage: false
+        };
+      this.pageListArr.push(newPageObj);
+    },
+    setHomePage: function(row, flag) {
+      var length = this.pageListArr.length;
+      for(var i=0;i<length;i++){
+        if(this.pageListArr[i].id===row.id){
+          this.pageListArr[i].isHomePage = true;
+        }else{
+          this.pageListArr[i].isHomePage = false;
+        }
+      }
+    },
+    editPage: function(row){
+      alert("编辑页面名为‘"+row.title+"’的页面");
+    },
+    deletePage: function(row){
+      var length = this.pageListArr.length;
+      for(var i=0;i<length;i++){
+        if(this.pageListArr[i].id===row.id){
+          this.pageListArr.splice(i,1);
+          break;
+        }
+      }
+    }
+  }
 };
 </script>
 
@@ -33,5 +111,58 @@ export default {
   height: 100%;
   width: 325px;
   background-color: @pageListBgColor;
+  overflow-y: auto;
+  .page-list-header {
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    padding: 0 20px;
+    font-size: 16px;
+  }
+  .plh-add {
+    float: right;
+    margin-top: 16px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .page-list-content {
+    border-top: 1px solid #e1e1e1;
+  }
+  .btn-set-home {
+    display: inline-block;
+    font-size: 12px;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    border-radius: 3px;
+    cursor: pointer;
+    &.is-home {
+      background: #3a8ee6;
+      color: #fff;
+    }
+    &.not-home {
+      background: #909399;
+      color: #fff;
+    }
+  }
+  .btn-operate{
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    font-size: 10px;
+    float: left;
+    line-height: 20px;
+    color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+    &.edit{
+      background: #3a8ee6;
+    }
+    &.delete{
+      margin-left: 6px;
+      background: red;
+    }
+  }
 }
 </style>
