@@ -1,9 +1,9 @@
 <template>
     <div class="sort-meta-unit">
             {{ metaName }}
-        <div class="hover-style">
+        <div class="hover-style" @click="setEditStatus">
             <div class="tip-btns">
-                <span class="tip-btn">编辑</span>
+                <span class="tip-btn" @click="setEditStatus">编辑</span>
                 <span class="tip-btn">删除</span>
             </div>
         </div>
@@ -33,7 +33,13 @@ export default {
     computed: {},
     watch: {},
     methods: {
-
+        setEditStatus: function() {
+            this.$store.dispatch("VUEX_SETTING_META", {
+                name: this.metaName,  // 组件名称
+                type: "", // 组件名称（代码）
+                id: "" // 组件实例id
+            });
+        }
     }
 }
 </script>

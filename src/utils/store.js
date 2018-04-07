@@ -1,4 +1,4 @@
-import demo from "./vuex/demo.js";
+import system from "./vuex/system.js";
 export default {
-    demo: demo
+    system: system
 }

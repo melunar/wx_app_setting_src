@@ -68,6 +68,7 @@ export default {
           isHomePage: false
         }
       ];
+      this.setCurPageStore(this.pageListArr[0]);
     },
     addNewPage: function() {
       var newPageObj = {
@@ -88,7 +89,8 @@ export default {
       }
     },
     editPage: function(row){
-      alert("编辑页面名为‘"+row.title+"’的页面");
+      // alert("编辑页面名为‘"+row.title+"’的页面");
+      this.setCurPageStore(row);
     },
     deletePage: function(row){
       var length = this.pageListArr.length;
@@ -98,6 +100,18 @@ export default {
           break;
         }
       }
+    },
+    setCurPageStore: function(page) {
+      var pageConfig = { //  mock get pageConfig by page id
+        title: "标题" + Math.random()
+        // more
+      };
+      this.$store.dispatch("VUEX_SETTING_PAGE", {
+            title: pageConfig.title, 
+            name: page.title, 
+            url: "", // 页面url
+            id: "" // 页面id
+        });
     }
   }
 };

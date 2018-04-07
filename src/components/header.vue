@@ -1,14 +1,14 @@
 <template>
     <div class="page-header">
         <div class="navbar-left fl">
-            <span class="normal-btn" @click="testVuexDispatch"> 
+            <span class="normal-btn" @click="testVuexDispatch">
                 <i class="fa fa-angle-left btn-pre-icon" style="font-size: 20px;"></i>
                 <span class="btn-text">返回</span>
             </span>
         </div>
         <!--中间按钮-->
         <div class="navbar-main"> 
-            <span class="normal-btn up-down-btn">
+            <span class="normal-btn up-down-btn" @click="pageSet">
                 <i class="fa fa-wrench btn-pre-icon"></i>
                 <span class="btn-text">页面设置</span>
             </span>
@@ -97,12 +97,19 @@ export default {
         console.log(e.pageX, e.pageY)
     },
     hideSubMeta: function() {
-        debugger
         console.log("hideSubMeta");
         this.curMetaList = [];
     },
     testVuexDispatch: function() {
-      this.$store.dispatch("VUEX_DEMO", !this.$store.state.demo.vuex_demo);
+      
+    },
+    //打开、关闭页面配置
+    pageSet: function() {
+        // var pageInfo = this.$store.state.system.vuex_setting_page;
+        // pageInfo.timeStamp = new Date().getTime();
+        this.$store.dispatch("VUEX_SETTING_IS_PAGE", true);
+        // this.$store.state.system.vuex_setting_from.isSettingPage = false;
+        // this.$store.state.system.vuex_setting_from.isSettingPage = !this.$store.state.system.vuex_setting_from.isSettingPage;
     }
   }
 };
