@@ -29,6 +29,9 @@ import httpTest from "./utils/service.js";
   console.log(res);
 }); */
 
+// 导入一些配置
+require("./utils/config.js");
+
 /* eslint-disable no-new */
 window.vueInstance = new Vue({
   el: '#app',

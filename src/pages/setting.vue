@@ -38,8 +38,9 @@ export default {
   background-color: @pageBgColor;
 
   .page-container {
-    position: relative;
-    height: calc(~"100% - 50px");
+    position: absolute;
+    height: calc(~"100% - 55px");
+    top: 50px; width: 100%;
   }
 }
 </style>
