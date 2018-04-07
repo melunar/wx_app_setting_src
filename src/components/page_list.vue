@@ -2,7 +2,7 @@
     <div class="page-manager">
         <div class="page-list-header">
           <div class="plh-title">页面
-            <i class="plh-add fa fa-plus" @click="addNewPage"></i>
+            <i class="plh-add fa fa-plus" title="新建页面" @click="addNewPage"></i>
           </div>
         </div>
 
