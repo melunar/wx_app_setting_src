@@ -30,3 +30,35 @@ GC.metaList = [
     , { id: "0034", name: "自定义菜单4", type: "03", fontawesomeIcon: "fa fa-cubes"}
     , { id: "0034", name: "自定义菜单4", type: "03", fontawesomeIcon: "fa fa-cubes"}
 ];
+
+
+
+
+//挂载全局的message对象  
+window.messageWithConsoleLog = false;  
+window.message = {
+    warn: function(message) {
+        if (window.messageWithConsoleLog) {
+            console.log(message);
+        }
+        window.vueInstance.$message.warning(message);
+    },
+    info: function(message) {
+        if (window.messageWithConsoleLog) {
+            console.log(message);
+        }
+        window.vueInstance.$message(message);
+    },
+    success: function(message) {
+        if (window.messageWithConsoleLog) {
+            console.log(message);
+        }
+        window.vueInstance.$message.success(message);
+    },
+    error: function(message) {
+        if (window.messageWithConsoleLog) {
+            console.log(message);
+        }
+        window.vueInstance.$message.error(message);
+    }
+};
