@@ -2,9 +2,9 @@
     <div class="setting-page-container">
         <navHeader />
         <div class="page-container clearfix">
-            <!--<pageList />-->
+            <pageList />
             <cpSettings />
-            <!--<appModel />-->
+            <appModel />
         </div> 
     </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <div class="bottom-menu-meta">
+    <div class="meta-bottom-menu">
         
     </div>
 </template>
@@ -35,7 +35,7 @@ export default {
 <style scoped lang="less">
     //@import "../../less/variables.less";
     //@import "../../less/sprite.less";
-    .bottom-menu-meta {
+    .meta-bottom-menu {
         
     }
 </style>

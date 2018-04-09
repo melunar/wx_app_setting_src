@@ -3,14 +3,15 @@
         <div class="page-title">{{ isPage ? '页面配置' :  setting_meta.name + "配置"}}</div>
         <div class="page-content">
 					<div v-if="isPage" class="page-setting-content">
-            {{ setting_page.title }} <br>
-            {{ setting_page.name }}
+            <!-- {{ setting_page.title }} <br> -->
+            <!-- {{ setting_page.name }} -->
           </div>
           <div v-if="!isPage" class="meta-setting-content">
-            {{ setting_meta.name }}
+            <!-- {{ setting_meta.name }} -->
           </div>
 				</div>
         <pageSetting />
+        <metaCarouselSetting />
     </div>
 </template>
 
@@ -25,7 +26,10 @@ export default {
   },
   components: {
     pageSetting: function (resolve) {
-            require(["./meta/page/setting.vue"], resolve);
+        require(["./meta/page/setting.vue"], resolve);
+    },
+    metaCarouselSetting: function (resolve) {
+        require(["./meta/carousel/setting.vue"], resolve);
     }
   },
   created: function() {},

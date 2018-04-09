@@ -3,7 +3,7 @@
         <baseLine :labelText="labelText">
             <template slot="settingBaseLineSlot">
                 <el-slider style="width: 100%; height: 35px;"
-                    v-model="_value" :max="max" :min="min" />
+                    v-model="_value" :max="max" :min="min" :step="step" />
                 <span class="slider-tip"> {{ _value }}({{ tipsText }}) </span>
             </template>
         </baseLine>
@@ -24,6 +24,9 @@ export default {
         max: {type: Number, default: 100},
         // 单位名称或提示
         min: {type: Number, default: 0},
+ 
+        // 步长
+        step: {type: Number, default: 1},
 
         
         // 默认值

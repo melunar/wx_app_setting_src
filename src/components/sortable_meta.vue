@@ -1,6 +1,11 @@
 <template>
     <div class="sort-meta-unit">
-            {{ metaName }}
+        <div v-if="metaId">
+            <component :is="componentId"></component>
+        </div>
+        <div v-if="!metaId">
+            {{"test " + metaName }}
+        </div>
         <div class="hover-style" @click="setEditStatus">
             <div class="tip-btns">
                 <span class="tip-btn" @click="setEditStatus">编辑</span>
@@ -15,22 +20,33 @@ export default {
     name: "sortableMetaUnit",
     mixins:[],
     props: {
+        // 组件ID 时间戳
+        metaId: {type: Number, default: 0 }, 
+        // 组件名称
         metaName: {type: String, default: "" }
     },
     data: function() {
         return {
-
+            // componentId: ""
         };
     },
     components: {
-        /*requireDemo: function (resolve) {
-            require([""], resolve);
-        }*/
+        carousel: function (resolve) {
+            require(["@/components/meta/carousel/carousel.vue"], resolve);
+        },
+        carouselSetting: function (resolve) {
+            require(["@/components/meta/carousel/setting.vue"], resolve);
+        }
     },
     created: function() {},
     mounted: function() {},
     beforeDestroy: function() {},
-    computed: {},
+    computed: {
+        componentId: function() {
+            if(this.metaId) return this.metaName;
+            return "";
+        }
+    },
     watch: {},
     methods: {
         setEditStatus: function() {
@@ -49,7 +65,7 @@ export default {
     //@import "../less/sprite.less";
     .sort-meta-unit {
         width: 100%; 
-        height: 100px; /* test height */
+        min-height: 100px; /* test height */
         position: relative;
         margin-bottom: 3px;
         background: chocolate;

@@ -15,7 +15,8 @@
                                 </div> -->
                                 <component :is="componentId" 
                                 v-for="(item, index) in meatUnit" :key="index"
-                                :metaName="item.name"></component>
+                                :metaId="item.id"
+                                :metaName="item.name" />
                             </draggable>
                         </div>
                     </div>
@@ -37,11 +38,11 @@ export default {
     mixins:[],
     props: {
         // 组件列表
-        meatUnit: {type: Array, default: function() { return [{name: "number1"},{name: "number2"},{name: "number3"},{name: "number4"},{name: "number5"}] }}
+        meatUnit: {type: Array, default: function() { return [{name: "carousel", id: new Date().getTime()},{name: "number2"},{name: "number3"},{name: "number4"},{name: "number5"}] }}
     },
     data: function() {
         return {
-            
+            pageName: "未命名标题"
         };
     },
     components: {

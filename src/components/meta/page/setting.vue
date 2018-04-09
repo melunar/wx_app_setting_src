@@ -20,14 +20,12 @@
         <radioGroup 
             v-model="pageHeaderColor"
             :labelText="'顶部文字颜色'"
-            :radioArray="pageHeaderColorList"
-        />
+            :radioArray="pageHeaderColorList" />
         <numberSlider 
             v-model="marginValue"
             :labelText="'页面边距'"
             :tipsText="'px'"
-            :max="20" :min="0"
-        />
+            :max="20" :min="0" />
         <br><br>
         <el-button @click="consoleOut">输出参数（console）</el-button>
     </div>
