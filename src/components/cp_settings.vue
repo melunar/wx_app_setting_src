@@ -19,7 +19,7 @@ export default {
   mixins: [],
   data: function() {
     return {
-      isPage: true
+      // isPage: true
     };
   },
   components: {
@@ -31,16 +31,21 @@ export default {
   mounted: function() {},
   beforeDestroy: function() {},
   computed: { 
+    isPage: function() {
+      return this.$store.state.system.vuex_setting_is_page;  
+    },
     setting_page: function() {
-      this.isPage = true;
-      if(this.$store.state.system.vuex_setting_is_page) { //点击导航的页面编辑
+      this.$store.dispatch("VUEX_SETTING_IS_PAGE", true);
+      // this.isPage = true;
+      /*if(this.$store.state.system.vuex_setting_is_page) { //点击导航的页面编辑
         return this.$store.state.system.vuex_setting_page;  
-      } 
+      } */
       return this.$store.state.system.vuex_setting_page;
     },
     setting_meta: function() { 
-      this.isPage = false;
-      this.$store.state.system.vuex_setting_page = false;
+      // this.isPage = false;
+      this.$store.dispatch("VUEX_SETTING_IS_PAGE", false);
+      // this.$store.state.system.vuex_setting_page = false;
       return this.$store.state.system.vuex_setting_meta;
     }
   },
