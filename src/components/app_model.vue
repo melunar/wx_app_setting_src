@@ -22,6 +22,11 @@
                 </div>
             </div>
         </div>
+        <!-- 配置页 -->
+        <!-- <template slot="cpSettingSlot" scope="props"> -->
+        <template>
+            
+		</template>
     </div>
 </template>
 
@@ -31,11 +36,12 @@ export default {
     name: "appModel",
     mixins:[],
     props: {
+        // 组件列表
         meatUnit: {type: Array, default: function() { return [{name: "number1"},{name: "number2"},{name: "number3"},{name: "number4"},{name: "number5"}] }}
     },
     data: function() {
         return {
-            pageName: "未命名页面"
+            
         };
     },
     components: {

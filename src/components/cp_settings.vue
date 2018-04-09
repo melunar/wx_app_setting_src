@@ -10,6 +10,7 @@
             {{ setting_meta.name }}
           </div>
 				</div>
+        <pageSetting />
     </div>
 </template>
 
@@ -23,9 +24,9 @@ export default {
     };
   },
   components: {
-    /*requireDemo: function (resolve) {
-            require([""], resolve);
-        }*/
+    pageSetting: function (resolve) {
+            require(["./meta/page/setting.vue"], resolve);
+    }
   },
   created: function() {},
   mounted: function() {},
