@@ -3,8 +3,8 @@
         <baseLine :labelText="labelText">
             <template slot="settingBaseLineSlot">
                 <el-slider style="width: 100%; height: 35px;"
-                    v-model="myVlaue" :max="max" :min="min" />
-                <span class="slider-tip"> {{ myVlaue }}({{ tipsText }}) </span>
+                    v-model="_value" :max="max" :min="min" />
+                <span class="slider-tip"> {{ _value }}({{ tipsText }}) </span>
             </template>
         </baseLine>
     </div>
@@ -18,19 +18,21 @@ export default {
     props: { 
         // 标签文字
         labelText: {type: String, default: "未知属性"},
-        // 默认值
-        modelVlaue: {type: Number, default: 0},
         // 单位名称或提示
         tipsText: {type: String, default: "单位"},
         // 最大值
         max: {type: Number, default: 100},
         // 单位名称或提示
         min: {type: Number, default: 0},
+
+        
+        // 默认值
+        value: {type: Number, default: 0},
         
     },
     data: function() {
         return {
-            myVlaue: this.modelVlaue
+            //myVlaue: this.modelVlaue
         };
     },
     components: {
@@ -42,7 +44,16 @@ export default {
     created: function() {},
     mounted: function() {},
     beforeDestroy: function() {},
-    computed: {},
+    computed: {
+        _value: {
+            get: function () {
+                return this.value;
+            },
+            set: function (val) {
+                this.$emit("input", val);
+            }
+        }
+    },
     watch: {},
     methods: {
 

@@ -10,23 +10,26 @@
             :labelText="'页面标题'" />
         <colorSelect 
             :labelText="'页面颜色'"
-            :curColor="pageBgColor"
-            :defaultColor="pageBgColor" />
+            v-model="pageBgColor"
+            @change="getPageBgColor"
+            :defaultColor="pageBgColorDefault" />
         <colorSelect 
             :labelText="'顶部背景颜色'"
-            :curColor="pageHeaderBgColor"
-            :defaultColor="pageHeaderBgColor" />
+            v-model="pageHeaderBgColor"
+            :defaultColor="pageHeaderBgColorDefault" />
         <radioGroup 
             v-model="pageHeaderColor"
             :labelText="'顶部文字颜色'"
             :radioArray="pageHeaderColorList"
         />
         <numberSlider 
-            :modelVlaue="3"
+            v-model="marginValue"
             :labelText="'页面边距'"
             :tipsText="'px'"
             :max="20" :min="0"
         />
+        <br><br>
+        <el-button @click="consoleOut">输出参数（console）</el-button>
     </div>
 </template>
 
@@ -58,15 +61,15 @@ export default {
             pageTitle: this.pageTitleProp,
             pageId: this.pageIdProp,
             pageBgColor: this.pageBgColorProp,
+            pageBgColorDefault: "#FFF",
             pageHeaderBgColor: this.pageHeaderBgColorProp,
+            pageHeaderBgColorDefault: "#FFF",
             pageHeaderColor: this.pageHeaderColorProp,
             pageHeaderColorList: [ // 顶部文字颜色列举
                 { value: 1, text: "黑色" },
                 { value: 2, text: "白色" }
             ],
-            tipsFormat1: function(val) {
-                return val/10;
-            }
+            marginValue: 3
         };
     },
     components: {
@@ -84,7 +87,19 @@ export default {
     },
     watch: {},
     methods: {
-        
+       consoleOut: function() {
+           console.group("\/***page setting output");
+           console.log("pageName = " + this.pageName);
+           console.log("pageTitle = " + this.pageTitle);
+           console.log("pageBgColor = " + this.pageBgColor);
+           console.log("pageHeaderBgColor = " + this.pageHeaderBgColor);
+           console.log("pageHeaderColor = " + this.pageHeaderColor);
+           console.log("marginValue = " + this.marginValue);
+           console.groupEnd("page setting output***\/");
+       },
+       getPageBgColor: function(color) {
+           message.info("getPageBgColor = " + color);
+       }
     }
 }
 </script>

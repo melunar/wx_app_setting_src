@@ -2,7 +2,7 @@
     <div class="setting-meta-radio-group">
         <baseLine :labelText="labelText">
             <template slot="settingBaseLineSlot">
-                <el-radio-group style="margin: 7px 0 0;" v-model="myValue">
+                <el-radio-group style="margin: 7px 0 0;" v-model="_value">
                     <el-radio v-for="(item, index) in radioArray" :key="index" 
                         :label="item.value">{{ item.text }}</el-radio>
                 </el-radio-group>
@@ -23,11 +23,11 @@ export default {
         radioArray: {type: Array, default: function() { return [] }},
         
         // model
-        value: {type: String, default: ""}
+        value: {type: Number, default: 0}
     },
     data: function() {
         return {
-            myValue: this.value
+            //myValue: this.value
         };
     },
     components: {
@@ -39,7 +39,16 @@ export default {
     created: function() {},
     mounted: function() {},
     beforeDestroy: function() {},
-    computed: {},
+    computed: { 
+        _value: {
+            get: function () {
+                return this.value;
+            },
+            set: function (val) {
+                this.$emit("input", val);
+            }
+        } 
+    },
     watch: {},
     methods: {
 

@@ -50,6 +50,7 @@ export default {
         }
         .grid-content {
             width: 96%;
+            margin-left: 2%;
         }
     }
 </style>

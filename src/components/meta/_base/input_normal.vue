@@ -2,7 +2,7 @@
     <div class="setting-meta-input">
         <baseLine :labelText="labelText">
             <template slot="settingBaseLineSlot">
-                <el-input v-model="myText" size="mini" />
+                <el-input v-model="_value" size="mini" />
                 <template v-if="isShowTips">
                     <p class="input-tips" :style="{'color': tipsColor}">{{ tipsContent }}</p>
                 </template>
@@ -30,7 +30,7 @@ export default {
     },
     data: function() {
         return {
-            myText: this.value
+            //myText: this.value
         };
     },
     components: {
@@ -42,8 +42,21 @@ export default {
     created: function() {},
     mounted: function() {},
     beforeDestroy: function() {},
-    computed: {},
-    watch: {},
+    computed: {
+        _value: {
+            get: function () {
+                return this.value;
+            },
+            set: function (val) {
+                this.$emit("input", val);
+            }
+        }
+    },
+    watch: {
+        "value": function(val) {
+            //this.$emit("input", val)
+        }
+    },
     methods: {
 
     }

@@ -2,7 +2,7 @@
     <div class="setting-meta-color-select">
         <baseLine :labelText="labelText">
             <template slot="settingBaseLineSlot">
-                <el-color-picker class="fl" v-model="myCurColor" size="mini" @change="changeColor"/>
+                <el-color-picker class="fl" v-model="_value" size="mini" @change="changeColor"/>
                 <el-button size="mini" @click="resetColor">重置</el-button>
             </template>
         </baseLine>
@@ -20,12 +20,12 @@ export default {
         // 点击重置的颜色值
         defaultColor: {type: String, default: "#F3F3F3"},
         // 当前的颜色值
-        curColor: {type: String, default: "#F3F3F3"} 
+        value: {type: String, default: "#F3F3F3"} 
          
     },
     data: function() {
         return {
-            myCurColor: this.value
+            // myCurColor: this.value
         };
     },
     components: {
@@ -37,17 +37,26 @@ export default {
     created: function() {},
     mounted: function() {},
     beforeDestroy: function() {},
-    computed: {},
+    computed: {
+        _value: {
+            get: function () {
+                return this.value;
+            },
+            set: function (val) {
+                this.$emit("input", val);
+            }
+        }
+    },
     watch: {},
     methods: {
         // 重置颜色
         resetColor: function() {
-            this.myCurColor = this.defaultColor;
+            this._value = this.defaultColor;
         },
         // 选择颜色
         changeColor: function(color) {
             message.info("change color: " + color);
-            //this.myCurColor = this.defaultColor;
+            this.$emit("change", color);
         }
     }
 }
