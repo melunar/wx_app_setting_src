@@ -1,6 +1,7 @@
 <template>
     <div class="meta-carousel">
         <imageDisplay :type="1" 
+            :imageList="imageList"
             :btnPosition="btnPosition"
             :btnShape="btnShape" 
             :btnColor="btnColor"
@@ -16,20 +17,26 @@ export default {
     name: "metaCarousel",
     mixins:[],
     props: {
-        name: {type: Array, default: function() { return [] }}
+        imageList: {type: Array, default: function() { return [
+            { src: "", linkUrl: "#" },
+            { src: "", linkUrl: "#" }
+        ] }},
+        btnShape: {type: Number, default: 1},
+        btnPosition: {type: Number, default: 3},
+        btnColor: {type: String, default: "#fff"},
+        btnMarginLR: {type: Number, default: 5},
+        btnMarginBottom: {type: Number, default: 5},
+        btnTransparency: {type: Number, default: 0.8},
     },
     data: function() {
         return {
-            imageList: [
-                { src: "", linkUrl: "" },
-                { src: "", linkUrl: "" }
-            ],
-            btnShape: 1,
-            btnPosition: 2,
-            btnColor: "#fff",
-            btnMarginLR: 5,
-            btnMarginBottom: 5,
-            btnTransparency: 0.8
+            // ImageList: this.imageList,
+            // BtnShape: this.btnShape,
+            // BtnPosition: this.btnPosition,
+            // BtnColor: this.btnColor,
+            // BtnMarginLR: this.btnMarginLR,
+            // BtnMarginBottom: this.btnMarginBottom,
+            // BtnTransparency: this.btnTransparency
         };
     },
     components: {

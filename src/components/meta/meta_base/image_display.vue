@@ -3,8 +3,9 @@
     <div class="meta-base-image-display">
         <div class="image-container">
             <img v-for="(item, index) in ImageList" :key="index"
+                :data-href="item.linkUrl"
                 class="image-normal" :class="{'hide': type===1 && index > 0}"
-                :src="item.src || defaultImageUrl(index)">
+                :src="item.src | defaultImageUrl(index)">
         </div>
         <div v-if="type===1" class="images-carousel-btns"
             :class="{
@@ -14,9 +15,9 @@
             }">
             <span v-for="i in ImageList.length" :key="i" class="carousel-btn"
                 :class="{
-                    'carousel-btn-shape-circle': btnPosition === 1,
-                    'carousel-btn-shape-rect2': btnPosition === 2,
-                    'carousel-btn-shape-rect': btnPosition === 3
+                    'carousel-btn-shape-circle': btnShape === 1,
+                    'carousel-btn-shape-rect2': btnShape === 2,
+                    'carousel-btn-shape-rect': btnShape === 3
                 }"
                 :style="{
                     'background-color': btnColor,
@@ -76,8 +77,12 @@ export default {
     computed: {},
     watch: {},
     methods: {
+        
+    },
+    filters: {
         // 设置默认图标占位符背景图片
-        defaultImageUrl: function(index) {
+        defaultImageUrl: function(url, index) {
+            if(url) return url;
             var rest = index % 2;
             return "/static/images/static_img/img-bg-" + rest + ".jpg"
         }
@@ -104,7 +109,7 @@ export default {
         }
         .carousel-btn-left { float: left; }
         .carousel-btn-center { text-align: center; width: 100%; }
-        .carousel-btn-right { float: right; }
+        .carousel-btn-right { position: absolute; right: 0; } /* 右侧显示 无法右侧浮动方式实现 被其他dom阻断 */
 
         .carousel-btn { width: 10px; height: 10px; display: inline-block; }
         .carousel-btn-shape-circle { border-radius: 10px; }

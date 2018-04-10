@@ -3,7 +3,7 @@
         <div v-if="metaId">
             <component :is="componentId"></component>
         </div>
-        <div v-if="!metaId">
+        <div v-if="!metaId" style="height: 100px; background: chocolate;">
             {{"test " + metaName }}
         </div>
         <div class="hover-style" @click="setEditStatus">
@@ -33,6 +33,9 @@ export default {
     components: {
         carousel: function (resolve) {
             require(["@/components/meta/carousel/carousel.vue"], resolve);
+        },
+        bottomMenu: function (resolve) {
+            require(["@/components/meta/bottom_menu/bottom_menu.vue"], resolve);
         },
         carouselSetting: function (resolve) {
             require(["@/components/meta/carousel/setting.vue"], resolve);
@@ -65,10 +68,9 @@ export default {
     //@import "../less/sprite.less";
     .sort-meta-unit {
         width: 100%; 
-        min-height: 100px; /* test height */
+        min-height: 5px; /* test height */
         position: relative;
-        margin-bottom: 3px;
-        background: chocolate;
+        margin-bottom: 3px; 
         &:hover { .hover-style { display: block; } }
         .hover-style { 
             display: none;

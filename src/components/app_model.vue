@@ -38,7 +38,7 @@ export default {
     mixins:[],
     props: {
         // 组件列表
-        meatUnit: {type: Array, default: function() { return [{name: "carousel", id: new Date().getTime()},{name: "number2"},{name: "number3"},{name: "number4"},{name: "number5"}] }}
+        meatUnit: {type: Array, default: function() { return [{name: "carousel", id: new Date().getTime()},{name: "bottomMenu", id: new Date().getTime() + 1000},{name: "number3"},{name: "number4"},{name: "number5"}] }}
     },
     data: function() {
         return {

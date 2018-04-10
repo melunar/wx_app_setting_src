@@ -12,6 +12,7 @@
 				</div>
         <pageSetting />
         <metaCarouselSetting />
+        <metaBottomMenuSetting />
     </div>
 </template>
 
@@ -30,6 +31,9 @@ export default {
     },
     metaCarouselSetting: function (resolve) {
         require(["./meta/carousel/setting.vue"], resolve);
+    },
+    metaBottomMenuSetting: function (resolve) {
+        require(["./meta/bottom_menu/setting.vue"], resolve);
     }
   },
   created: function() {},
