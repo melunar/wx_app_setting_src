@@ -66,7 +66,7 @@ export default {
         id: isId ? index : this.pageListArr[index].id
       };
       SERVICE("pageInfo", param, function(res) { 
-        this.setCurPageStore(res.data.config);
+        this.setCurPageStore(res.data);
       }.bind(this));
     },
     addNewPage: function() {
@@ -102,12 +102,17 @@ export default {
     },
     //设置页面配置的参数 
     setCurPageStore: function(pageInfo) {
-      if(!pageInfo) {
+      if(!pageInfo.config) {
         message.error("获取页面配置失败！");
         return;
       }
-      this.$store.dispatch("VUEX_SETTING_PAGE", pageInfo);
+      this.$store.dispatch("VUEX_SETTING_PAGE", pageInfo.config);
       this.$store.dispatch("VUEX_SETTING_IS_PAGE", true);
+      if(!pageInfo.metas) {
+        message.error("获取页面组件！");
+        return;
+      }
+      this.$store.dispatch("VUEX_PAGE_METAS", pageInfo.metas);
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
     <div class="componnets-detail-settings">
-        <div class="page-title">{{ isPage ? '页面配置' :  setting_meta.name + "配置"}}</div>
+        <div class="page-title">{{ isPage ? '页面配置' :  setting_meta && setting_meta.metaName + "配置"}}</div>
         <div class="page-content">
 					<div v-if="isPage" class="page-setting-content">
             <pageSetting 
@@ -11,11 +11,10 @@
               :pageHeaderColor="setting_page.pageHeaderColor" />
           </div>
           <div v-if="!isPage" class="meta-setting-content">
-            <!-- {{ setting_meta.name }} -->
+              <metaCarouselSetting />
+              <metaBottomMenuSetting />
           </div>
-				</div>
-        <metaCarouselSetting />
-        <metaBottomMenuSetting />
+				</div> 
     </div>
 </template>
 
@@ -52,7 +51,11 @@ export default {
     },
     setting_meta: function() {  
       this.$store.dispatch("VUEX_SETTING_IS_PAGE", false); 
-      return this.$store.state.system.vuex_setting_meta;
+      if(this.$store.state.system.vuex_setting_meta) {
+        return this.$store.state.system.vuex_setting_meta;
+      } else {
+        return {};
+      }
     }
   },
   watch: {

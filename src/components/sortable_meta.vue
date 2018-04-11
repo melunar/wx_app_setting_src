@@ -23,7 +23,11 @@ export default {
         // 组件ID 时间戳
         metaId: {type: Number, default: 0 }, 
         // 组件名称
-        metaName: {type: String, default: "" }
+        metaName: {type: String, default: "" },
+        // 组件名称 需要跟组件名称完全对应 用于is动态加载组件
+        metaType: {type: String, default: "" },
+        // 组件配置
+        metaConfig: {type: Object, default: function() {return null} }
     },
     data: function() {
         return {
@@ -46,18 +50,23 @@ export default {
     beforeDestroy: function() {},
     computed: {
         componentId: function() {
-            if(this.metaId) return this.metaName;
+            if(this.metaId) return this.metaType;
             return "";
         }
     },
     watch: {},
     methods: {
         setEditStatus: function() {
-            this.$store.dispatch("VUEX_SETTING_META", {
+            var metaConfig = this.metaConfig;
+            metaConfig.metaYype = this.metaType; //记录组件类型和名称 用于一一对应
+            metaConfig.metaName = this.metaName;
+            metaConfig.metaId = this.metaId;
+            debugger
+            this.$store.dispatch("VUEX_SETTING_META", metaConfig/* {
                 name: this.metaName,  // 组件名称
                 type: "", // 组件名称（代码）
                 id: "" // 组件实例id
-            });
+            } */);
         }
     }
 }

@@ -13,15 +13,17 @@
                             'background-color': pageBgColor,
                             'padding': marginValue + 'px'
                         }" >
-                        <div v-if="meatUnit.length === 0" class="phone-empty">
+                        <div v-if="metasBySort.length === 0" class="phone-empty">
                             您尚未添加任何元素
                         </div>
-                        <div v-if="meatUnit.length > 0" class="phone-sort-meat">
-                            <draggable v-model="meatUnit"> 
+                        <div v-if="metasBySort.length > 0" class="phone-sort-meat">
+                            <draggable v-model="metasBySort"> 
                                 <component :is="componentId" 
-                                v-for="(item, index) in meatUnit" :key="index"
+                                v-for="(item, index) in metasBySort" :key="index"
                                 :metaId="item.id"
-                                :metaName="item.name" />
+                                :metaType="item.name"
+                                :metaConfig="item.config"
+                                :metaName="item.text" />
                             </draggable>
                         </div>
                     </div>
@@ -38,7 +40,21 @@ export default {
     mixins:[],
     props: {
         // 组件列表
-        meatUnit: {type: Array, default: function() { return [{name: "carousel", id: new Date().getTime()},{name: "bottomMenu", id: new Date().getTime() + 1000},{name: "number3"},{name: "number4"},{name: "number5"}] }},
+        metas: {type: Array, default: function() { return [{name: "carousel", id: new Date().getTime()},{name: "bottomMenu", id: new Date().getTime() + 1000},{
+            "id": 3434345,
+            "sort": 1,
+            "type": "002",
+            "text": "轮播图",
+            "name": "carousel",
+            "config": {
+                "btnShape": 3,
+                "btnPosition": 2,
+                "btnColor": "#fff",
+                "btnMarginLR": 5,
+                "btnMarginBottom": 5,
+                "btnTransparency": 0.8
+            }
+        },{name: "number4"},{name: "number5"}] }},
         // 页面标题 用于页面内容展示
         pageTitle: {type: String, default: "未命名标题"},
         // 页面背景色
@@ -55,7 +71,8 @@ export default {
             pageHeaderColorMap: {
                 "1": "#000",
                 "2": "#fff"
-            }
+            },
+            metasBySort: this.metas || []
         };
     },
     components: {
@@ -70,10 +87,16 @@ export default {
     beforeDestroy: function() {},
     computed: {
         componentId: function() {
-            return this.meatUnit.length ? "sortableMeta" : "";
+            return this.metas.length ? "sortableMeta" : "";
         }
     },
-    watch: {},
+    watch: {
+        "metas": {
+            handler: function(vals) {
+                this.metasBySort = vals || [];
+            }, deep: true
+        }
+    },
     methods: {
 
     }

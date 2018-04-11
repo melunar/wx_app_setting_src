@@ -5,6 +5,7 @@
             <pageList />
             <cpSettings />
             <page 
+              :metas="pageMetas"
               :pageName="pageConfig.pageName" 
               :pageTitle="pageConfig.pageTitle" 
               :pageBgColor="pageConfig.pageBgColor" 
@@ -32,12 +33,18 @@ export default {
     page
   },
   computed: {
-    pageConfig: function() {
-      debugger;
+    pageConfig: function() { 
       if (this.$store.state.system.vuex_setting_page) {
         return this.$store.state.system.vuex_setting_page;
       } else {
         return {};
+      }
+    },
+    pageMetas: function() {  
+      if (this.$store.state.system.vuex_page_metas) {
+        return this.$store.state.system.vuex_page_metas;
+      } else {
+        return [];
       }
     }
   }
