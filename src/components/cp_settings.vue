@@ -13,8 +13,9 @@
           <div v-if="!isPage" class="meta-setting-content">
               <metaCarouselSetting />
               <metaBottomMenuSetting />
-          </div>
-				</div> 
+              <richTextSetting/>
+          </div> 
+        </div> 
     </div>
 </template>
 
@@ -36,6 +37,9 @@ export default {
     },
     metaBottomMenuSetting: function (resolve) {
         require(["./meta/bottom_menu/setting.vue"], resolve);
+    },
+    richTextSetting: function (resolve) {
+        require(["./meta/rich_text/setting.vue"], resolve);
     }
   },
   created: function() {},
