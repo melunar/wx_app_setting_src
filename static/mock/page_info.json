@@ -1,0 +1,55 @@
+{
+    "data": {
+        "config": {
+            "id": 543234523,
+            "pageName": "页面名称（接口）",
+            "pageTitle": "页面标题（接口）",
+            "pageBgColor": "#eee",
+            "pageBgColorDefault": "#fff",
+            "pageHeaderBgColor": "#aaa",
+            "pageHeaderBgColorDefault": "#fff",
+            "pageHeaderColor": 2,
+            "marginValue": 5
+        },
+        "metas": [{
+            "id": 3434345,
+            "sort": 1,
+            "type": "002",
+            "name": "轮播图",
+            "config": {
+                "btnShape": 3,
+                "btnPosition": 2,
+                "btnColor": "#fff",
+                "btnMarginLR": 5,
+                "btnMarginBottom": 5,
+                "btnTransparency": 0.8
+            }
+        },{
+            "id": 343434432345,
+            "sort": 2,
+            "type": "002",
+            "name": "轮播图",
+            "config": {
+                "btnShape": 1,
+                "btnPosition": 3,
+                "btnColor": "#f44",
+                "btnMarginLR": 10,
+                "btnMarginBottom": 5,
+                "btnTransparency": 0.4
+            }
+        },{
+            "id": 36434344322345,
+            "sort": 3,
+            "type": "003",
+            "name": "自定义菜单",
+            "config": {
+                "menuType": 1,
+                "bgColor": "#400",
+                "activeBgColor": "#400",
+                "LineColor": "#f44", 
+                "FontColor": "#444", 
+                "ActiveFontColor": "#f44"
+            }
+        }]
+    }
+}

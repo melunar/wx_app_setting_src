@@ -3,16 +3,21 @@
         <div class="phone-container">
             <div class="phone-model">
                 <div class="phone-body">
-                    <div class="phone-header">{{ pageName }}</div>
-                    <div class="phone-content">
+                    <div class="phone-header"
+                        :style="{
+                            'background-color': pageHeaderBgColor,
+                            'color': pageHeaderColorMap[pageHeaderColor]
+                        }">{{ pageTitle }}</div>
+                    <div class="phone-content" 
+                        :style="{
+                            'background-color': pageBgColor,
+                            'padding': marginValue + 'px'
+                        }" >
                         <div v-if="meatUnit.length === 0" class="phone-empty">
                             您尚未添加任何元素
                         </div>
                         <div v-if="meatUnit.length > 0" class="phone-sort-meat">
-                            <draggable v-model="meatUnit">
-                                <!-- <div v-for="(item, index) in meatUnit" :key="index">
-                                    <br>123123<br>123123 {{item.name}}
-                                </div> -->
+                            <draggable v-model="meatUnit"> 
                                 <component :is="componentId" 
                                 v-for="(item, index) in meatUnit" :key="index"
                                 :metaId="item.id"
@@ -22,12 +27,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- 配置页 -->
-        <!-- <template slot="cpSettingSlot" scope="props"> -->
-        <template>
-            
-		</template>
+        </div>  
     </div>
 </template>
 
@@ -38,11 +38,24 @@ export default {
     mixins:[],
     props: {
         // 组件列表
-        meatUnit: {type: Array, default: function() { return [{name: "carousel", id: new Date().getTime()},{name: "bottomMenu", id: new Date().getTime() + 1000},{name: "number3"},{name: "number4"},{name: "number5"}] }}
+        meatUnit: {type: Array, default: function() { return [{name: "carousel", id: new Date().getTime()},{name: "bottomMenu", id: new Date().getTime() + 1000},{name: "number3"},{name: "number4"},{name: "number5"}] }},
+        // 页面标题 用于页面内容展示
+        pageTitle: {type: String, default: "未命名标题"},
+        // 页面背景色
+        pageBgColor: {type: String, default: "#FFF"},
+        // 页面顶部背景色
+        pageHeaderBgColor: {type: String, default: "#FFF"},
+        // 页面顶部文字背景色
+        pageHeaderColor: {type: Number, default: 1},
+        // 页面边距
+        marginValue: {type: Number, default: 0}
     },
     data: function() {
-        return {
-            pageName: "未命名标题"
+        return { 
+            pageHeaderColorMap: {
+                "1": "#000",
+                "2": "#fff"
+            }
         };
     },
     components: {
@@ -51,7 +64,8 @@ export default {
         },
         draggable
     },
-    created: function() {},
+    created: function() {
+    },
     mounted: function() {},
     beforeDestroy: function() {},
     computed: {

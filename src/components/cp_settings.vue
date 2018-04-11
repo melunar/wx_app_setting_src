@@ -3,14 +3,17 @@
         <div class="page-title">{{ isPage ? '页面配置' :  setting_meta.name + "配置"}}</div>
         <div class="page-content">
 					<div v-if="isPage" class="page-setting-content">
-            <!-- {{ setting_page.title }} <br> -->
-            <!-- {{ setting_page.name }} -->
+            <pageSetting 
+              :pageName="setting_page.pageName" 
+              :pageTitle="setting_page.pageTitle" 
+              :pageBgColor="setting_page.pageBgColor" 
+              :pageHeaderBgColor="setting_page.pageHeaderBgColor" 
+              :pageHeaderColor="setting_page.pageHeaderColor" />
           </div>
           <div v-if="!isPage" class="meta-setting-content">
             <!-- {{ setting_meta.name }} -->
           </div>
 				</div>
-        <pageSetting />
         <metaCarouselSetting />
         <metaBottomMenuSetting />
     </div>
@@ -45,16 +48,10 @@ export default {
     },
     setting_page: function() {
       this.$store.dispatch("VUEX_SETTING_IS_PAGE", true);
-      // this.isPage = true;
-      /*if(this.$store.state.system.vuex_setting_is_page) { //点击导航的页面编辑
-        return this.$store.state.system.vuex_setting_page;  
-      } */
       return this.$store.state.system.vuex_setting_page;
     },
-    setting_meta: function() { 
-      // this.isPage = false;
-      this.$store.dispatch("VUEX_SETTING_IS_PAGE", false);
-      // this.$store.state.system.vuex_setting_page = false;
+    setting_meta: function() {  
+      this.$store.dispatch("VUEX_SETTING_IS_PAGE", false); 
       return this.$store.state.system.vuex_setting_meta;
     }
   },
