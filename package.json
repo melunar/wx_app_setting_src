@@ -18,8 +18,10 @@
     "axios": "^0.18.0",
     "element-ui": "^2.3.2",
     "sortable": "^2.0.0",
+    "underscore": "^1.8.3",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
+    "vue-wangeditor": "^1.3.9",
     "vuedraggable": "^2.16.0",
     "vuex": "^3.0.1"
   },

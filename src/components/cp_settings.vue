@@ -13,6 +13,7 @@
         <pageSetting />
         <metaCarouselSetting />
         <metaBottomMenuSetting />
+        <!-- <richTextSetting/> -->
     </div>
 </template>
 
@@ -34,6 +35,9 @@ export default {
     },
     metaBottomMenuSetting: function (resolve) {
         require(["./meta/bottom_menu/setting.vue"], resolve);
+    },
+    richTextSetting: function (resolve) {
+        require(["./meta/rich_text/setting.vue"], resolve);
     }
   },
   created: function() {},
