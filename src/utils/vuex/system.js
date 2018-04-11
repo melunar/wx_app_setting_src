@@ -6,13 +6,17 @@ var state = {
         id: "" // 组件实例id
         , timeStamp: new Date().getTime()
     }, 
-    vuex_setting_page: { //当前配置的页面信息
-        title: "page", // 页面标题
-        name: "", // 页面名称
-        url: "", // 页面url
-        id: "" // 页面id
-        , timeStamp: new Date().getTime()
-    }
+    vuex_setting_page: null//{ //当前配置的页面信息
+        /* "id": 0, 
+        "pageName": "", 
+        "pageTitle": "", 
+        "pageBgColor": "", 
+        "pageBgColorDefault": "", 
+        "pageHeaderBgColor": "", 
+        "pageHeaderBgColorDefault": "", 
+        "pageHeaderColor": "", 
+        "marginValue": 0 */
+    // }
     //vuex_setting_from: {} //当前配置选中组件或页面
 };
 var actions = { 

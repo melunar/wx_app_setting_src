@@ -5,7 +5,6 @@
             <i class="plh-add fa fa-plus" title="新建页面" @click="addNewPage"></i>
           </div>
         </div>
-
         <div class="page-list-content">
           <el-table :data="pageListArr" style="width: 100%;height:25">
             <el-table-column prop="title" label="名称" width="170"></el-table-column>
@@ -41,77 +40,74 @@ export default {
             require([""], resolve);
         }*/
   },
-  created: function() {},
-  mounted: function() {
+  created: function() {
     this.getPageList();
+  },
+  mounted: function() {
+    
   },
   beforeDestroy: function() {},
   computed: {},
   watch: {},
   methods: {
+    //获取当前模板的页面列表
     getPageList: function() {
-      this.pageListArr = [
-        {
-          //id是为了编辑、删除时进行添加
-          id: 0,
-          title: "首页",
-          isHomePage: true
-        },
-        {
-          id: 1,
-          title: "页面1",
-          isHomePage: false
-        },
-        {
-          id: 2,
-          title: "页面2",
-          isHomePage: false
+      var param = null;
+      SERVICE("templatePagesList", param, function(res) {
+        this.pageListArr = res.data;
+        if(res.data && res.data.forEach && res.data.length) {
+          this.getPageInfo(0); //激活第一个页面
         }
-      ];
-      this.setCurPageStore(this.pageListArr[0]);
+      }.bind(this));
+    },
+    //获取页面的所有信息
+    getPageInfo: function(index, isId) {
+      var param = {
+        id: isId ? index : this.pageListArr[index].id
+      };
+      SERVICE("pageInfo", param, function(res) { 
+        this.setCurPageStore(res.data.config);
+      }.bind(this));
     },
     addNewPage: function() {
       var newPageObj = {
-          id: new Date().getTime(),
-          title: "未命名页面",
-          isHomePage: false
-        };
+        id: new Date().getTime(),
+        title: "未命名页面",
+        isHomePage: false
+      };
       this.pageListArr.push(newPageObj);
     },
     setHomePage: function(row, flag) {
       var length = this.pageListArr.length;
-      for(var i=0;i<length;i++){
-        if(this.pageListArr[i].id===row.id){
+      for (var i = 0; i < length; i++) {
+        if (this.pageListArr[i].id === row.id) {
           this.pageListArr[i].isHomePage = true;
-        }else{
+        } else {
           this.pageListArr[i].isHomePage = false;
         }
       }
     },
-    editPage: function(row){
-      // alert("编辑页面名为‘"+row.title+"’的页面");
-      this.setCurPageStore(row);
+    editPage: function(row) {
+      var id = row.id;
+      this.getPageInfo(id, true);
     },
-    deletePage: function(row){
+    deletePage: function(row) {
       var length = this.pageListArr.length;
-      for(var i=0;i<length;i++){
-        if(this.pageListArr[i].id===row.id){
-          this.pageListArr.splice(i,1);
+      for (var i = 0; i < length; i++) {
+        if (this.pageListArr[i].id === row.id) {
+          this.pageListArr.splice(i, 1);
           break;
         }
       }
     },
-    setCurPageStore: function(page) {
-      var pageConfig = { //  mock get pageConfig by page id
-        title: "标题" + Math.random()
-        // more
-      };
-      this.$store.dispatch("VUEX_SETTING_PAGE", {
-            title: pageConfig.title, 
-            name: page.title, 
-            url: "", // 页面url
-            id: "" // 页面id
-        });
+    //设置页面配置的参数 
+    setCurPageStore: function(pageInfo) {
+      if(!pageInfo) {
+        message.error("获取页面配置失败！");
+        return;
+      }
+      this.$store.dispatch("VUEX_SETTING_PAGE", pageInfo);
+      this.$store.dispatch("VUEX_SETTING_IS_PAGE", true);
     }
   }
 };
@@ -159,7 +155,7 @@ export default {
       color: #fff;
     }
   }
-  .btn-operate{
+  .btn-operate {
     height: 20px;
     width: 20px;
     display: inline-block;
@@ -170,10 +166,10 @@ export default {
     border-radius: 3px;
     text-align: center;
     cursor: pointer;
-    &.edit{
+    &.edit {
       background: #3a8ee6;
     }
-    &.delete{
+    &.delete {
       margin-left: 6px;
       background: red;
     }

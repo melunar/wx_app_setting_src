@@ -4,7 +4,13 @@
         <div class="page-container clearfix">
             <pageList />
             <cpSettings />
-            <appModel />
+            <page 
+              :pageName="pageConfig.pageName" 
+              :pageTitle="pageConfig.pageTitle" 
+              :pageBgColor="pageConfig.pageBgColor" 
+              :pageHeaderBgColor="pageConfig.pageHeaderBgColor" 
+              :pageHeaderColor="pageConfig.pageHeaderColor"
+              :marginValue="pageConfig.marginValue" />
         </div> 
     </div>
 </template>
@@ -13,7 +19,7 @@
 import navHeader from "@/components/header.vue";
 import pageList from "@/components/page_list.vue";
 import cpSettings from "@/components/cp_settings.vue";
-import appModel from "@/components/app_model.vue";
+import page from "@/components/page.vue";
 export default {
   name: "mainPage",
   data: function() {
@@ -23,7 +29,17 @@ export default {
     navHeader,
     pageList,
     cpSettings,
-    appModel
+    page
+  },
+  computed: {
+    pageConfig: function() {
+      debugger;
+      if (this.$store.state.system.vuex_setting_page) {
+        return this.$store.state.system.vuex_setting_page;
+      } else {
+        return {};
+      }
+    }
   }
 };
 </script>
@@ -40,7 +56,8 @@ export default {
   .page-container {
     position: absolute;
     height: calc(~"100% - 55px");
-    top: 50px; width: 100%;
+    top: 50px;
+    width: 100%;
   }
 }
 </style>
