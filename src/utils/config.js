@@ -12,9 +12,9 @@ GC.metaTypeList = [
 
 /* 组件列表 */
 GC.metaList = [
-    { id: "001", name: "富文本", type: "01", fontawesomeIcon: "fa fa-cubes"}
-    , { id: "002", name: "轮播图", type: "01", fontawesomeIcon: "fa fa-cubes"}
-    , { id: "003", name: "自定义菜单", type: "01", fontawesomeIcon: "fa fa-cubes"}
+    { id: "001", meta: "richText", name: "富文本", type: "01", fontawesomeIcon: "fa fa-cubes"}
+    , { id: "002", meta: "carousel", name: "轮播图", type: "01", fontawesomeIcon: "fa fa-cubes"}
+    , { id: "003", meta: "bottomMenu", name: "自定义菜单", type: "01", fontawesomeIcon: "fa fa-cubes"}
     , { id: "0031", name: "自定义菜单1", type: "01", fontawesomeIcon: "fa fa-cubes"}
     , { id: "0032", name: "自定义菜单2", type: "01", fontawesomeIcon: "fa fa-cubes"}
     , { id: "0033", name: "自定义菜单3", type: "02", fontawesomeIcon: "fa fa-cubes"}
@@ -30,6 +30,10 @@ GC.metaList = [
     , { id: "0034", name: "自定义菜单4", type: "03", fontawesomeIcon: "fa fa-cubes"}
     , { id: "0034", name: "自定义菜单4", type: "03", fontawesomeIcon: "fa fa-cubes"}
 ];
+GC.metaListMap = {};
+for(var i = 0; i < GC.metaList.length; i++) {
+    GC.metaListMap[GC.metaList[i].id] = GC.metaList[i];
+}
 
 
 

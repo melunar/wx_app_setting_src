@@ -59,12 +59,16 @@ export default {
     },
     data: function() {
         return {
-            BtnShape: this.btnShape,
-            BtnPosition: this.btnPosition,
-            BtnColor: this.btnColor, 
-            BtnMarginLR: this.btnMarginLR,
-            BtnMarginBottom: this.btnMarginBottom,
-            BtnTransparency: this.btnTransparency, 
+            metaId: this.metaInfo.metaId,
+            metaType: "002",
+            metaText: "轮播图",
+
+            BtnShape: this.metaInfo.btnShape,
+            BtnPosition: this.metaInfo.btnPosition,
+            BtnColor: this.metaInfo.btnColor, 
+            BtnMarginLR: this.metaInfo.btnMarginLR,
+            BtnMarginBottom: this.metaInfo.btnMarginBottom,
+            BtnTransparency: this.metaInfo.btnTransparency, 
             btnShapeList: [ 
                 { value: 1, text: "长方形" },
                 { value: 2, text: "正方形" },

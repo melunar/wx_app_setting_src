@@ -12,7 +12,7 @@
             "marginValue": 5
         },
         "metas": [{
-            "id": 3434345,
+            "metaId": 3434345,
             "sort": 1,
             "type": "002",
             "text": "轮播图",
@@ -26,7 +26,7 @@
                 "btnTransparency": 0.8
             }
         },{
-            "id": 343434432345,
+            "metaId": 343434432345,
             "sort": 2,
             "type": "002",
             "text": "轮播图",
@@ -40,7 +40,7 @@
                 "btnTransparency": 0.4
             }
         },{
-            "id": 36434344322345,
+            "metaId": 36434344322345,
             "sort": 3,
             "type": "003",
             "text": "自定义菜单",
@@ -49,9 +49,15 @@
                 "menuType": 1,
                 "bgColor": "#400",
                 "activeBgColor": "#400",
-                "LineColor": "#f44", 
-                "FontColor": "#444", 
-                "ActiveFontColor": "#f44"
+                "lineColor": "#f44", 
+                "fontColor": "#444", 
+                "activeFontColor": "#f44",
+                "menuList": [
+                    {"text": "消息", "imgSrc": "", "linkUrl": "#"},
+                    {"text": "联系人", "imgSrc": "", "linkUrl": "#"},
+                    {"text": "个人中心", "imgSrc": "", "linkUrl": "#"},
+                    {"text": "个人中心", "imgSrc": "", "linkUrl": "#"}
+                ]
             }
         }]
     }

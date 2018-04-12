@@ -3,23 +3,23 @@
         <el-row type="flex" class="row-bg">
             <!-- 这里强制使用24单位为了适配flex布局最大化宽度 -->
             <el-col :span="24"
-                v-for="(item, index) in menuList" :key="index"> 
+                v-for="(item, index) in metaInfo.menuList" :key="index"> 
                 <div class="grid-content" :data-href="item.linkUrl"
                     :style="{
-                        'border-right-color': lineColor,
-                        'background-color': activeIndex === index ? activeBgColor : bgColor
+                        'border-right-color': metaInfo.lineColor,
+                        'background-color': activeIndex === index ? metaInfo.activeBgColor : metaInfo.bgColor
                     }">
-                    <template v-if="menuType === 1"><!-- 图文 -->
+                    <template v-if="metaInfo.menuType === 1"><!-- 图文 -->
                         <a class="icon-top">
                             <img class="image-mini" :src="item.imgSrc | defaultMiniImageUrl(index)">
                         </a>
                         <span class="text-mini text-overflow-ellipsis"
                             :style="{
-                                'color': activeIndex === index ? activeFontColor : fontColor
+                                'color': activeIndex === index ? metaInfo.activeFontColor : metaInfo.fontColor
                             }"    
                             >{{ item.text }}</span>
                     </template>
-                    <template v-if="menuType === 2"><!-- 图片 -->
+                    <template v-if="metaInfo.menuType === 2"><!-- 图片 -->
                         <a class="icon-full">
                             <img class="image-full" :src="item.imgSrc | defaultFullImageUrl(index)">
                         </a>
@@ -35,7 +35,7 @@ export default {
     name: "bottomMenu",
     mixins:[],
     props: {
-        menuList: {type: Array, default: function() {
+        /* menuList: {type: Array, default: function() {
             return [
                 {text: "消息", imgSrc: "", linkUrl: "#"},
                 {text: "联系人", imgSrc: "", linkUrl: "#"},
@@ -48,11 +48,29 @@ export default {
         activeBgColor: {type: String, default: "#eee"}, //选中背景色
         lineColor: {type: String, default: "#fff"}, //边框颜色
         fontColor: {type: String, default: "#666"},//字体颜色
-        activeFontColor: {type: String, default: "#f66"} //激活字体颜色
+        activeFontColor: {type: String, default: "#f66"} //激活字体颜色 */
+        metaId: { type: Number, default: 0 },
+        metaConfig: { type: Object, default: function() {
+            return {
+                menuList: [
+                    {text: "消息", imgSrc: "", linkUrl: "#"},
+                    {text: "联系人", imgSrc: "", linkUrl: "#"},
+                    {text: "个人中心", imgSrc: "", linkUrl: "#"},
+                    {text: "个人中心", imgSrc: "", linkUrl: "#"}
+                ],
+                menuType: 1,
+                bgColor: "#fff",
+                activeBgColor: "#eee",
+                lineColor: "#fff", //边框颜色
+                fontColor:"#666",//字体颜色
+                activeFontColor: "#f66" //激活字体颜色
+            }
+        } }
     },
     data: function() {
         return {
-            activeIndex: 0 //当前选中索引
+            activeIndex: 0, //当前选中索引,
+            metaInfo: this.metaConfig
         };
     },
     components: {
@@ -60,11 +78,28 @@ export default {
             require([""], resolve);
         }*/
     },
-    created: function() {},
+    created: function() { 
+    },
     mounted: function() {},
     beforeDestroy: function() {},
-    computed: {},
-    watch: {},
+    computed: {
+        meta_setting: function() { 
+            /* var config = this.$store.state.system.vuex_setting_meta;
+            if(metaId && config.metaId === metaId) {
+                this.metaInfo = config; 
+            } */
+            debugger
+            return this.$store.state.system.vuex_setting_meta;
+        },
+    },
+    watch: {
+        "meta_setting": function(config) {
+            debugger
+            if(this.metaId && config.metaId === this.metaId) {
+                this.metaInfo = config; 
+            }
+        }
+    },
     methods: {
        
     },
