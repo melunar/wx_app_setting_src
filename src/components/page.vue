@@ -20,10 +20,9 @@
                             <draggable v-model="metasBySort"> 
                                 <component :is="componentId" 
                                 v-for="(item, index) in metasBySort" :key="index"
-                                :metaId="item.id"
-                                :metaType="item.name"
-                                :metaConfig="item.config"
-                                :metaName="item.text" />
+                                :metaId="item.metaId"
+                                :metaType="item.type"
+                                :metaConfig="item.config" />
                             </draggable>
                         </div>
                     </div>
@@ -41,9 +40,9 @@ export default {
     props: {
         // 组件列表
         metas: {type: Array, default: function() { return [{name: "carousel", id: new Date().getTime()},{name: "bottomMenu", id: new Date().getTime() + 1000},{
-            "id": 3434345,
+            "metaId": 3434345,
             "sort": 1,
-            "type": "002",
+            "id": "002",
             "text": "轮播图",
             "name": "carousel",
             "config": {
