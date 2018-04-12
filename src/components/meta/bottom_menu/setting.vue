@@ -42,10 +42,13 @@ export default {
         lineColor: {type: String, default: "#fff"}, //边框颜色
         fontColor: {type: String, default: "#666"},//字体颜色
         activeFontColor: {type: String, default: "#666"} //激活字体颜色 */
+        // 组件id
+        metaId: {type: Number, default: 0 },
         metaInfo: {
             type: Object,
             default: function() {
                 return {
+                    metaId: "",
                     menuType: 1, //按钮类型
                     bgColor: "#fff", //背景颜色
                     activeBgColor: "#fff", //选中背景色
@@ -55,12 +58,10 @@ export default {
                 }
             }
         }
-       
-
     },
     data: function() {
         return {
-            metaId: this.metaInfo.metaId,
+            // metaId: this.metaId,
             metaType: "003",
             metaText: "自定义菜单",
 
@@ -111,21 +112,21 @@ export default {
         //更新属性数据
         dispatchNewStore: function() {
             var data = {
-                    metaId: this.metaId,
-                    metaType: this.metaType, //组件类型 一定要有
-                    menuType: this.menuType, //按钮类型
-                    bgColor: this.bgColor, //背景颜色
-                    activeBgColor: this.activeBgColor, //选中背景色
-                    lineColor: this.lineColor, //边框颜色
-                    fontColor: this.fontColor,//字体颜色
-                    activeFontColor: this.activeFontColor //激活字体颜色
+                metaId: this.metaId,
+                metaType: this.metaType, //组件类型 一定要有
+                menuType: this.menuType, //按钮类型
+                bgColor: this.bgColor, //背景颜色
+                activeBgColor: this.activeBgColor, //选中背景色
+                lineColor: this.lineColor, //边框颜色
+                fontColor: this.fontColor,//字体颜色
+                activeFontColor: this.activeFontColor //激活字体颜色
 
-                    , menuList: [ // todo 
-                    {text: "消息", imgSrc: "", linkUrl: "#"},
-                    {text: "联系人", imgSrc: "", linkUrl: "#"},
-                    {text: "个人中心", imgSrc: "", linkUrl: "#"},
-                    {text: "个人中心", imgSrc: "", linkUrl: "#"}
-                ],
+                , menuList: [ // todo 
+                {text: "消息", imgSrc: "", linkUrl: "#"},
+                {text: "联系人", imgSrc: "", linkUrl: "#"},
+                {text: "个人中心", imgSrc: "", linkUrl: "#"},
+                {text: "个人中心", imgSrc: "", linkUrl: "#"}
+            ],
             };
             this.$store.dispatch("VUEX_SETTING_META", data);
         },

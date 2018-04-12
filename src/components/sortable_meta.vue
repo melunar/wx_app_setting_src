@@ -6,7 +6,9 @@
         <div v-if="!metaId" style="height: 100px; background: chocolate;">
             {{"test " + metaName }}
         </div>
-        <div class="hover-style" @click="setEditStatus">
+        <div class="hover-style"
+            :style="{'display': isCurrentSelect ? 'block' : 'none'}"
+            @click="setEditStatus">
             <div class="tip-btns">
                 <span class="tip-btn" @click="setEditStatus">编辑</span>
                 <span class="tip-btn">删除</span>
@@ -49,6 +51,7 @@ export default {
     mounted: function() {},
     beforeDestroy: function() {},
     computed: {
+        // 组件指针
         componentId: function() {
             if(this.metaId) {
                 var name = GC.metaListMap[this.metaType] ? GC.metaListMap[this.metaType].meta : "";
@@ -56,20 +59,26 @@ export default {
                 return name;
             } 
             return "";
-        }
+        },
+        //是否高亮当前组件
+        isCurrentSelect: function() {
+            if(this.$store.state.system.vuex_setting_is_page) {
+                return false;
+            }
+            return this.$store.state.system.vuex_setting_meta ? this.$store.state.system.vuex_setting_meta.metaId === this.metaId : false;
+        } 
     },
-    watch: {},
+    watch: { 
+    },
     methods: {
         setEditStatus: function() {
             var metaConfig = this.metaConfig; 
+            // this.$set(this.metaConfig, "metaType", this.metaType);
+            // this.$set(this.metaConfig, "metaId", this.metaId);
             metaConfig.metaType = this.metaType;
             metaConfig.metaId = this.metaId;
-            // debugger
-            this.$store.dispatch("VUEX_SETTING_META", metaConfig/* {
-                name: this.metaName,  // 组件名称
-                type: "", // 组件名称（代码）
-                id: "" // 组件实例id
-            } */);
+            debugger
+            this.$store.dispatch("VUEX_SETTING_META", metaConfig);
         }
     }
 }
@@ -84,7 +93,7 @@ export default {
         position: relative;
         margin-bottom: 3px; 
         overflow: hidden;
-        &:hover { .hover-style { display: block; } }
+        &:hover { .hover-style { display: block !important; } }
         .hover-style { 
             display: none;
             position: absolute; top: 0;

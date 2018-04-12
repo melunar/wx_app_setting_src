@@ -12,7 +12,7 @@
             "marginValue": 5
         },
         "metas": [{
-            "metaId": 3434345,
+            "metaId": 343434511111,
             "sort": 1,
             "type": "002",
             "text": "轮播图",
@@ -26,14 +26,14 @@
                 "btnTransparency": 0.8
             }
         },{
-            "metaId": 343434432345,
+            "metaId": 343434432222,
             "sort": 2,
             "type": "002",
             "text": "轮播图",
             "name": "carousel",
             "config": {
                 "btnShape": 1,
-                "btnPosition": 3,
+                "btnPosition": 1,
                 "btnColor": "#f44",
                 "btnMarginLR": 10,
                 "btnMarginBottom": 5,

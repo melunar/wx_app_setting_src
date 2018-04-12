@@ -1,13 +1,13 @@
 <template>
     <div class="meta-carousel">
         <imageDisplay :type="1" 
-            :imageList="imageList"
-            :btnPosition="btnPosition"
-            :btnShape="btnShape" 
-            :btnColor="btnColor"
-            :btnMarginLR="btnMarginLR"
-            :btnMarginBottom="btnMarginBottom"
-            :btnTransparency="btnTransparency" />    
+            :imageList="metaInfo.imageList"
+            :btnPosition="metaInfo.btnPosition"
+            :btnShape="metaInfo.btnShape" 
+            :btnColor="metaInfo.btnColor"
+            :btnMarginLR="metaInfo.btnMarginLR"
+            :btnMarginBottom="metaInfo.btnMarginBottom"
+            :btnTransparency="metaInfo.btnTransparency" />    
     </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
     name: "metaCarousel",
     mixins:[],
     props: {
-        imageList: {type: Array, default: function() { return [
+        /* imageList: {type: Array, default: function() { return [
             { src: "", linkUrl: "#" },
             { src: "", linkUrl: "#" }
         ] }},
@@ -26,17 +26,26 @@ export default {
         btnColor: {type: String, default: "#fff"},
         btnMarginLR: {type: Number, default: 5},
         btnMarginBottom: {type: Number, default: 5},
-        btnTransparency: {type: Number, default: 0.8},
+        btnTransparency: {type: Number, default: 0.8}, */
+        metaId: { type: Number, default: 0 },
+        metaConfig: { type: Object, default: function() {
+            return {
+                imageList:  [
+                    { src: "", linkUrl: "#" },
+                    { src: "", linkUrl: "#" }
+                ],
+                btnShape: 1,
+                btnPosition: 3,
+                btnColor: "#fff",
+                btnMarginLR: 5,
+                btnMarginBottom: 5,
+                btnTransparency: 0.8,
+            }
+        } }
     },
     data: function() {
         return {
-            // ImageList: this.imageList,
-            // BtnShape: this.btnShape,
-            // BtnPosition: this.btnPosition,
-            // BtnColor: this.btnColor,
-            // BtnMarginLR: this.btnMarginLR,
-            // BtnMarginBottom: this.btnMarginBottom,
-            // BtnTransparency: this.btnTransparency
+            metaInfo: this.metaConfig
         };
     },
     components: {
@@ -48,8 +57,18 @@ export default {
     created: function() {},
     mounted: function() {},
     beforeDestroy: function() {},
-    computed: {},
-    watch: {},
+    computed: {
+        meta_setting: function() {
+            return this.$store.state.system.vuex_setting_meta;
+        }
+    },
+    watch: {
+        "meta_setting": function(config) { 
+            if(this.metaId && config.metaId === this.metaId) {
+                this.metaInfo = config; 
+            }
+        }
+    },
     methods: {
 
     }

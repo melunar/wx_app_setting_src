@@ -83,18 +83,16 @@ export default {
     mounted: function() {},
     beforeDestroy: function() {},
     computed: {
-        meta_setting: function() { 
-            /* var config = this.$store.state.system.vuex_setting_meta;
-            if(metaId && config.metaId === metaId) {
-                this.metaInfo = config; 
-            } */
-            debugger
+        meta_setting: function() {
             return this.$store.state.system.vuex_setting_meta;
-        },
+        }
     },
-    watch: {
-        "meta_setting": function(config) {
-            debugger
+    watch: { 
+        //同类型组件切换
+        "metaId": function() {
+            this.metaInfo = this.metaConfig;
+        },
+        "meta_setting": function(config) { 
             if(this.metaId && config.metaId === this.metaId) {
                 this.metaInfo = config; 
             }
