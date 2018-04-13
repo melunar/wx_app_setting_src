@@ -17,6 +17,7 @@
               <!-- <bottomMenuSetting /> -->
               <!-- <richTextSetting/> -->
           </div> 
+          <richTextSetting/> 
         </div> 
     </div>
 </template>
