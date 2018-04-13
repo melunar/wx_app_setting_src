@@ -16,8 +16,7 @@
               <!-- <carouselSetting /> -->
               <!-- <bottomMenuSetting /> -->
               <!-- <richTextSetting/> -->
-          </div> 
-          <richTextSetting/> 
+          </div>
         </div> 
     </div>
 </template>

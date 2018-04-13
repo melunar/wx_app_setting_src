@@ -43,9 +43,12 @@ export default {
         bottomMenu: function (resolve) {
             require(["@/components/meta/bottom_menu/bottom_menu.vue"], resolve);
         },
-        carouselSetting: function (resolve) {
-            require(["@/components/meta/carousel/setting.vue"], resolve);
+        richText: function (resolve) {
+            require(["@/components/meta/rich_text/rich_text.vue"], resolve);
         }
+        /* carouselSetting: function (resolve) {
+            require(["@/components/meta/carousel/setting.vue"], resolve);
+        }, */
     },
     created: function() {},
     mounted: function() {},

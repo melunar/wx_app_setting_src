@@ -129,7 +129,7 @@ export default {
            console.groupEnd("page setting output***\/");
        },
        getPageBgColor: function(color) {
-           message.info("getPageBgColor = " + color);
+           //message.info("getPageBgColor = " + color);
        }
     }
 }

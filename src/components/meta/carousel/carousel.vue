@@ -79,6 +79,6 @@ export default {
     //@import "../less/variables.less";
     //@import "../less/sprite.less";
     .meta-carousel {
-        
+        position: relative;
     }
 </style>

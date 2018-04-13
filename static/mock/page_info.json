@@ -26,8 +26,17 @@
                 "btnTransparency": 0.8
             }
         },{
-            "metaId": 343434432222,
+            "metaId": 3451151111,
             "sort": 2,
+            "type": "001",
+            "config": {
+                "bgColor": "#1ff",  
+                "paddingValue": 30,  
+                "richTextContent": "<b>123:这是富文本</b><br><hr><h3>标题</h3>"
+            }
+        },{
+            "metaId": 343434432222,
+            "sort": 3,
             "type": "002",
             "text": "轮播图",
             "name": "carousel",
@@ -41,7 +50,7 @@
             }
         },{
             "metaId": 36434344322345,
-            "sort": 3,
+            "sort": 4,
             "type": "003",
             "text": "自定义菜单",
             "name": "bottomMenu",
