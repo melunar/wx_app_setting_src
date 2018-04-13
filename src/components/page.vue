@@ -17,7 +17,15 @@
                             您尚未添加任何元素
                         </div>
                         <div v-if="metasBySort.length > 0" class="phone-sort-meat">
-                            <draggable v-model="metasBySort"> 
+                                <!-- @start="draggableStart"
+                                @add="draggableAdd"
+                                @remove="draggableRemove" 
+                                @update="draggableUpdate"
+                                @end="draggableEnd" 
+                                @choose="draggableChoose"  
+                                @filter="draggableFilter" 
+                                @clone="draggableClone" -->
+                            <draggable v-model="metasBySort" @sort="draggableSort"> 
                                 <component :is="componentId" 
                                 v-for="(item, index) in metasBySort" :key="index"
                                 :metaId="item.metaId"
@@ -97,7 +105,31 @@ export default {
         }
     },
     methods: {
+        //拖拽排序
+        /* draggableStart: function(e,a,b) { 
+            console.log("-----托拉拽操作：" + e.type); 
+            console.log("-------------- oldIndex：" + e.oldIndex); 
+        }, */
+        // draggableAdd: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger},
+        // draggableRemove: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger},
+        // draggableUpdate: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger},
+        /* draggableEnd: function(e,a,b) {
+            console.log("-----托拉拽操作：" + e.type);
+            console.log("-----          newIndex：" + e.newIndex);
+            console.log("-----          oldIndex：" + e.oldIndex);
+        }, */
+        // draggableChoose: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger},
+        draggableSort: function(e,a,b) {
+            console.log("-----托拉拽操作：" + e.type);console.log("-----托拉拽操作：" + e.type);
+            console.log("-----          newIndex：" + e.newIndex);
+            console.log("-----          oldIndex：" + e.oldIndex);
+        },
+        // draggableFilter: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger},
+        // draggableClone: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger}
+        
+        // todo more and more
 
+        //拖拽排序 end
     }
 }
 </script>

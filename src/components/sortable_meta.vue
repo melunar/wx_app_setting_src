@@ -94,7 +94,7 @@ export default {
         width: 100%; 
         min-height: 5px; /* test height */
         position: relative;
-        margin-bottom: 3px; 
+        // margin-bottom: 3px; 
         overflow: hidden;
         &:hover { .hover-style { display: block !important; } }
         .hover-style { 

@@ -13,9 +13,6 @@
           <div v-if="!isPage" class="meta-setting-content">
             <component :is="metaSettingComponentId" 
               :metaId="setting_meta.metaId" :metaInfo="setting_meta"></component>
-              <!-- <carouselSetting /> -->
-              <!-- <bottomMenuSetting /> -->
-              <!-- <richTextSetting/> -->
           </div>
         </div> 
     </div>
@@ -63,8 +60,7 @@ export default {
       debugger
       if(this.$store.state.system.vuex_setting_meta) { 
         this.$store.dispatch("VUEX_SETTING_IS_PAGE", false); 
-        
-        
+         
         var metaId = this.$store.state.system.vuex_setting_meta.metaId;
         if(this.metaId !== metaId) {
           this.refreshMeta(function() { 
@@ -104,16 +100,11 @@ export default {
         }.bind(this));
     },
     setMetaName: function(id, metaId) {
-      /* if(this.metaId !== metaId) {
-        this.refreshMeta(function() { 
-          
-        }.bind(this));  
-      } */
       if(!GC.metaListMap[id]) {
         //message.error("组件设置初始化失败！请联系开发者");
         return "";
       }
-      this.metaNameText = GC.metaListMap[id].name;// + "(" + this.setting_meta.metaId +")";
+      this.metaNameText = GC.metaListMap[id].name;
       console.log("读取到的配置组件 = " + GC.metaListMap[id].meta)
       return GC.metaListMap[id].meta + "Setting";
     }
@@ -131,6 +122,7 @@ export default {
   float: right;
   height: 100%;
   width: 440px;
+  overflow: hidden;
   background-color: @pageListBgColor;
     .page-title {
         height: 50px;
