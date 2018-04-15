@@ -55,7 +55,7 @@ export default {
         },
         // 选择颜色
         changeColor: function(color) {
-            message.info("change color: " + color);
+            // message.info("change color: " + color);
             this.$emit("change", color);
         }
     }

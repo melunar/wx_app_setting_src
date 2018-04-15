@@ -107,7 +107,7 @@ export default {
     //@import "../less/sprite.less";
     .sort-meta-unit {
         width: 100%; 
-        min-height: 5px; /* test height */
+        min-height: 20px;
         position: relative;
         overflow: hidden;
         &:hover { .hover-style { display: block !important; } }

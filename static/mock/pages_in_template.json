@@ -10,25 +10,25 @@
             "id": 342255451,
             "title": "产品展示",
             "url": "#",
-            "isHomePage": true
+            "isHomePage": false
         },
         {
             "id": 342252545,
             "title": "照片墙",
             "url": "#",
-            "isHomePage": true
+            "isHomePage": false
         },
         {
             "id": 342253545,
             "title": "加入我们",
             "url": "#",
-            "isHomePage": true
+            "isHomePage": false
         },
         {
             "id": 34225545,
             "title": "关于我们",
             "url": "#",
-            "isHomePage": true
+            "isHomePage": false
         }
     ]
 }

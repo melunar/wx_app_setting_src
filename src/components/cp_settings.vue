@@ -71,28 +71,25 @@ export default {
     /* "setting_page": function(val) {
     
     }, */
-    "setting_meta": function(val) {
+    "setting_meta": function(data) {
         console.log("右侧组件设置更新");
-        this.useDefaultConfig = !!val.isDefaultConfig;
+        this.useDefaultConfig = !!data.isDefaultConfig;
       debugger
       //  todo 点击组件编辑->触发一次组件编辑 这里响应了两次？？？？？？？
-      if(this.$store.state.system.vuex_setting_meta) { 
+      if(data) { 
         this.$store.dispatch("VUEX_SETTING_IS_PAGE", false); // 组件配置时 取消页面配置状态
-        var metaId = this.$store.state.system.vuex_setting_meta.metaId;
+        var metaId = data.metaId;
         if(this.metaId !== metaId) { //是当前组件的配置改变
           this.refreshMeta(function() {  
-            this.metaId = this.$store.state.system.vuex_setting_meta.metaId;
-            this.metaSettingComponentId = this.setMetaName(this.$store.state.system.vuex_setting_meta.metaType); 
-            
+            this.metaId = data.metaId;
+            this.metaSettingComponentId = this.setMetaName(data.metaType);  
           }.bind(this));  
         } else {
-          this.metaId = this.$store.state.system.vuex_setting_meta.metaId;
-            this.metaSettingComponentId = this.setMetaName(this.$store.state.system.vuex_setting_meta.metaType); 
-        }
-        return this.$store.state.system.vuex_setting_meta;
+          this.metaId = data.metaId;
+            this.metaSettingComponentId = this.setMetaName(data.metaType); 
+        } 
       } else {
-        this.metaSettingComponentId = this.setMetaName("0000000");
-        return {};
+        this.metaSettingComponentId = this.setMetaName("0000000");  // ""组件
       }
     }
   },
@@ -124,7 +121,7 @@ export default {
   float: right;
   height: 100%;
   width: 440px;
-  overflow: hidden;
+  overflow-x: hidden;
   background-color: @pageListBgColor;
     .page-title {
         height: 50px;
