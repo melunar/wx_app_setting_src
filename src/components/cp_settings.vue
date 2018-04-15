@@ -11,8 +11,10 @@
               :pageHeaderColor="setting_page && setting_page.pageHeaderColor" />
           </div>
           <div v-if="!isPage" class="meta-setting-content">
-            <component :is="metaSettingComponentId" 
-              :metaId="setting_meta ? setting_meta.metaId : 0" :metaInfo="setting_meta"></component>
+            <component v-if="!useDefaultConfig" :is="metaSettingComponentId" 
+              :metaId="setting_meta ? setting_meta.metaId : 0" :metaInfo="setting_meta" />
+            <component v-if="useDefaultConfig" :is="metaSettingComponentId" 
+              :metaId="setting_meta ? setting_meta.metaId : 0" />
           </div>
         </div> 
     </div>
@@ -28,6 +30,7 @@ export default {
       metaSettingComponentId: "" //组件配置指向
       , metaNameText: ""  //组件名
       , metaId: 0  //当前组件id
+      , useDefaultConfig: false //是否使用组件默认配置（针对新组件）
     };
   },
   components: {
@@ -69,12 +72,12 @@ export default {
     
     }, */
     "setting_meta": function(val) {
-        console.log("组件设置更新");
+        console.log("右侧组件设置更新");
+        this.useDefaultConfig = !!val.isDefaultConfig;
       debugger
       //  todo 点击组件编辑->触发一次组件编辑 这里响应了两次？？？？？？？
       if(this.$store.state.system.vuex_setting_meta) { 
         this.$store.dispatch("VUEX_SETTING_IS_PAGE", false); // 组件配置时 取消页面配置状态
-         
         var metaId = this.$store.state.system.vuex_setting_meta.metaId;
         if(this.metaId !== metaId) { //是当前组件的配置改变
           this.refreshMeta(function() {  

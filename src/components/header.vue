@@ -1,7 +1,7 @@
 <template>
     <div class="page-header">
         <div class="navbar-left fl">
-            <span class="normal-btn" @click="testVuexDispatch">
+            <span class="normal-btn" @click="backTo">
                 <i class="fa fa-angle-left btn-pre-icon" style="font-size: 20px;"></i>
                 <span class="btn-text">返回</span>
             </span>
@@ -22,7 +22,8 @@
                 v-if="curMetaList.length" @mouseleave="hideSubMeta" > 
 				<!-- <span class="panel-arrow"></span> -->
                 <ul class="show-panel">
-                    <li class="panel-meta" v-for="(item, index) in curMetaList" :key="index">
+                    <li class="panel-meta" v-for="(item, index) in curMetaList" :key="index"
+                        @click="addMetaInPage(item)">
                         <i class="" :class="[item.fontawesomeIcon]"></i>
                         <span>{{ item.name }}</span>
                     </li> 
@@ -96,12 +97,19 @@ export default {
         };
         // console.log(e.pageX, e.pageY)
     },
+    addMetaInPage: function(meta) {
+        var data = {
+            metaId: new Date().getTime(),
+            metaType: meta.id
+        };
+        this.$store.dispatch("VUEX_ADD_META_INFO", data);
+    },
     hideSubMeta: function() {
         console.log("hideSubMeta");
         this.curMetaList = [];
     },
-    testVuexDispatch: function() {
-      
+    backTo: function() {
+      message.ingo("去哪儿....");
     },
     //打开、关闭页面配置
     pageSet: function() { 

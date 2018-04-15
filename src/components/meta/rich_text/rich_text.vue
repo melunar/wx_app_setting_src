@@ -8,9 +8,10 @@
 </template>
 
 <script>
+import metaStyleUpdate from "../mixins/meta_style_update.js";
 export default {
     name: "metaRichText",
-    mixins:[],
+    mixins:[metaStyleUpdate],
     props: {
         metaId: { type: Number, default: 0 },
         metaConfig: { type: Object, default: function() {
@@ -35,16 +36,16 @@ export default {
     mounted: function() {},
     beforeDestroy: function() {},
     computed: {
-        meta_setting: function() {
+        /* meta_setting: function() {
             return this.$store.state.system.vuex_setting_meta;
-        }
+        } */
     },
     watch: {
-        "meta_setting": function(config) { 
-            if(this.metaId && config.metaId === this.metaId) {
+        /* "meta_setting": function(config) { 
+            if(this.metaId && config.metaId === this.metaId && !config.isDefaultConfig) {
                 this.metaInfo = config; 
             }
-        }
+        } */
     },
     methods: {
 

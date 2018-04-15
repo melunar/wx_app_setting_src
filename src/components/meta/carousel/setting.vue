@@ -61,7 +61,6 @@ export default {
             type: Object,
             default: function() {
                 return {
-                    metaId: "", //组件实例id
                     // 按钮形状
                     btnShape: 3,
                     // 按钮位置

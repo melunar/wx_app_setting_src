@@ -1,7 +1,10 @@
 <template>
     <div class="sort-meta-unit">
         <div v-if="metaId">
-            <component :is="componentId" :metaId="metaId" :metaConfig="metaConfig"></component>
+            <!-- 带有配置的组件 -->
+            <component v-if="!!metaConfig" :is="componentId" :metaId="metaId" :metaConfig="metaConfig"></component>
+            <!-- 首次添加没有配置的组件 -->
+            <component v-if="!metaConfig" :is="componentId" :metaId="metaId" />
         </div>
         <div v-if="!metaId" style="height: 100px; background: chocolate;">
             {{"test " + metaName }}
@@ -74,15 +77,18 @@ export default {
     methods: {
         // 编辑当前组件
         setEditStatus: function() {
-            debugger
             if(this.$store.state.system.vuex_setting_meta && this.$store.state.system.vuex_setting_meta.metaId === this.metaId && !this.$store.state.system.vuex_setting_is_page) {//重复触发同一个组件实例的编辑
                 return;
             }
-            var metaConfig = this.metaConfig;  
+            
+            var metaConfig = this.metaConfig || {};   //新组件 没有配置
+            // 这里设计的数据格式 config没有和id，type属性分离开，因此后面需要另加属性判断是不是新的组件（空配置）
+            if(!this.metaConfig) {
+                metaConfig.isDefaultConfig = true; // 如果是新组建 使用默认配置
+            }
             metaConfig.metaType = this.metaType;
             metaConfig.metaId = this.metaId;
-            console.log("编辑组件", metaConfig);
-            debugger
+            console.log("编辑组件", metaConfig); 
             this.$store.dispatch("VUEX_SETTING_META", metaConfig);
         },
         // 删除组件

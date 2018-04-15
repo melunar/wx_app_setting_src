@@ -47,8 +47,7 @@ export default {
         metaInfo: {
             type: Object,
             default: function() {
-                return {
-                    metaId: "",
+                return { 
                     menuType: 1, //按钮类型
                     bgColor: "#fff", //背景颜色
                     activeBgColor: "#fff", //选中背景色

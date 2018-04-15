@@ -31,9 +31,10 @@
 </template>
 
 <script>
+import metaStyleUpdate from "../mixins/meta_style_update.js";
 export default {
     name: "bottomMenu",
-    mixins:[],
+    mixins:[metaStyleUpdate],
     props: {
         /* menuList: {type: Array, default: function() {
             return [
@@ -83,20 +84,20 @@ export default {
     mounted: function() {},
     beforeDestroy: function() {},
     computed: {
-        meta_setting: function() {
+        /* meta_setting: function() {
             return this.$store.state.system.vuex_setting_meta;
-        }
+        } */
     },
     watch: { 
-        //同类型组件切换
-        "metaId": function() {
+        //同类型组件切换 del
+        /* "metaId": function() {
             this.metaInfo = this.metaConfig;
-        },
-        "meta_setting": function(config) { 
+        }, */
+        /* "meta_setting": function(config) { 
             if(this.metaId && config.metaId === this.metaId) {
                 this.metaInfo = config; 
             }
-        }
+        } */
     },
     methods: {
        

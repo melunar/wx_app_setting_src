@@ -40,7 +40,7 @@ export default {
         return {};
       }
     },
-    pageMetas: function() {  
+    pageMetas: function() {
       if (this.$store.state.system.vuex_page_metas) {
         return this.$store.state.system.vuex_page_metas;
       } else {

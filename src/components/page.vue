@@ -96,13 +96,28 @@ export default {
     computed: {
         componentId: function() {
             return this.metas.length ? "sortableMeta" : "";
+        },
+        // 添加的新组件
+        vuex_add_meta_info: function() {
+            return this.$store.state.system.vuex_add_meta_info;
         }
     },
     watch: {
         "metas": {
             handler: function(vals) {
+                console.log("页面组件刷新");
                 this.metasBySort = vals || [];
             }, deep: true
+        },
+        "vuex_add_meta_info": function(info) {
+            if(!info) { return; }
+            var newMeta = {
+                "metaId": info.metaId,
+                "sort": this.metasBySort.lenth,
+                "type": info.metaType,
+                "config": null
+            }
+            this.metasBySort.splice(this.metasBySort.length, 0, newMeta); 
         }
     },
     methods: {
@@ -130,13 +145,10 @@ export default {
             }.bind(this));
         },
         //拖拽排序 
-        draggableSort: function(e,a,b) { ;
+        draggableSort: function(e) {
             //console.log("-----          newIndex：" + e.newIndex);
             //console.log("-----          oldIndex：" + e.oldIndex); 
             console.log("----- 拖拽重排");
-            /* this.metasBySort.map(function(item, index) {
-                this.metasBySort[index].sort = index;
-            }.bind(this)); */
             this.reSortMetas();
         }, 
 

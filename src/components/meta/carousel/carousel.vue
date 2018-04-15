@@ -13,9 +13,10 @@
 
 <script>
 import imageDisplay from "../meta_base/image_display.vue";
+import metaStyleUpdate from "../mixins/meta_style_update.js";
 export default {
     name: "metaCarousel",
-    mixins:[],
+    mixins:[metaStyleUpdate],
     props: {
         /* imageList: {type: Array, default: function() { return [
             { src: "", linkUrl: "#" },
@@ -58,16 +59,16 @@ export default {
     mounted: function() {},
     beforeDestroy: function() {},
     computed: {
-        meta_setting: function() {
+        /* meta_setting: function() {
             return this.$store.state.system.vuex_setting_meta;
-        }
+        } */
     },
     watch: {
-        "meta_setting": function(config) { 
+        /* "meta_setting": function(config) { 
             if(this.metaId && config.metaId === this.metaId) {
                 this.metaInfo = config; 
             }
-        }
+        } */
     },
     methods: {
 
