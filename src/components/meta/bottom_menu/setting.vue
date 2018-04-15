@@ -128,6 +128,7 @@ export default {
                 {text: "个人中心", imgSrc: "", linkUrl: "#"}
             ],
             };
+            console.log("组件设置变更....");
             this.$store.dispatch("VUEX_SETTING_META", data);
         },
         consoleOut: function() {

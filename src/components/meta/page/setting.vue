@@ -116,6 +116,7 @@ export default {
                 "pageHeaderColor": this.PageHeaderColor, 
                 "marginValue": this.MarginValue
             };
+            console.log("页面设置变更....");
             this.$store.dispatch("VUEX_SETTING_PAGE", data);
         },
        consoleOut: function() {

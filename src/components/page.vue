@@ -30,7 +30,8 @@
                                 v-for="(item, index) in metasBySort" :key="index"
                                 :metaId="item.metaId"
                                 :metaType="item.type"
-                                :metaConfig="item.config" />
+                                :metaConfig="item.config"
+                                @delMeta="deleteMeta" />
                             </draggable>
                         </div>
                     </div>
@@ -105,37 +106,48 @@ export default {
         }
     },
     methods: {
-        //拖拽排序
-        /* draggableStart: function(e,a,b) { 
-            console.log("-----托拉拽操作：" + e.type); 
-            console.log("-------------- oldIndex：" + e.oldIndex); 
-        }, */
-        // draggableAdd: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger},
-        // draggableRemove: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger},
-        // draggableUpdate: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger},
-        /* draggableEnd: function(e,a,b) {
-            console.log("-----托拉拽操作：" + e.type);
-            console.log("-----          newIndex：" + e.newIndex);
-            console.log("-----          oldIndex：" + e.oldIndex);
-        }, */
-        // draggableChoose: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger},
-        draggableSort: function(e,a,b) {
-            //console.log("-----托拉拽操作：" + e.type);console.log("-----托拉拽操作：" + e.type);
-            //console.log("-----托拉拽操作：" + e.type);console.log("-----托拉拽操作：" + e.type);
+        //删除一个组件
+        deleteMeta: function(meta) {
+            var metaId = meta.metaId; 
+            var metaType = meta.metaType; 
+            var metaName = GC.metaListMap[metaType].name; 
+            this.metasBySort.map(function(item, index) {
+                if(metaId === item.metaId) { 
+                    this.$alert("确定要删除该" + metaName + "组件？", "警告", {
+                        confirmButtonText: '删除',
+                        callback: function() {
+                            this.metasBySort.splice(index, 1); // 删除
+                            this.reSortMetas(); // 重拍
+                            if(this.$store.state.system.vuex_setting_meta && 
+                                this.$store.state.system.vuex_setting_meta.metaId === metaId &&
+                                !this.$store.state.system.vuex_setting_is_page) { //删除的是当前正在编辑的组件 触发到页面编辑上
+                                console.log("删除....切换到页面配置")
+                                this.$store.dispatch("VUEX_SETTING_IS_PAGE", true);
+                            }
+                        }.bind(this)
+                    } )
+                } 
+            }.bind(this));
+        },
+        //拖拽排序 
+        draggableSort: function(e,a,b) { ;
             //console.log("-----          newIndex：" + e.newIndex);
-            //console.log("-----          oldIndex：" + e.oldIndex);
-            // this.metasBySort 在拖拽组件作用下会自动重拍 这里处理下内部的sort属性即可
+            //console.log("-----          oldIndex：" + e.oldIndex); 
             console.log("----- 拖拽重排");
+            /* this.metasBySort.map(function(item, index) {
+                this.metasBySort[index].sort = index;
+            }.bind(this)); */
+            this.reSortMetas();
+        }, 
+
+        //拖拽排序 end
+
+        // 对组件sort字段重新排序
+        reSortMetas: function() {
             this.metasBySort.map(function(item, index) {
                 this.metasBySort[index].sort = index;
             }.bind(this));
-        },
-        // draggableFilter: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger},
-        // draggableClone: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger}
-        
-        // todo more and more
-
-        //拖拽排序 end
+        }
     }
 }
 </script>

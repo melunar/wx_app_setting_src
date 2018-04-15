@@ -94,7 +94,7 @@ export default {
             // top: e.pageY + 10 + "px",
             left: 40 + 80 * index + "px" // todo 优化 大致 居中
         };
-        console.log(e.pageX, e.pageY)
+        // console.log(e.pageX, e.pageY)
     },
     hideSubMeta: function() {
         console.log("hideSubMeta");
@@ -104,12 +104,8 @@ export default {
       
     },
     //打开、关闭页面配置
-    pageSet: function() {
-        // var pageInfo = this.$store.state.system.vuex_setting_page;
-        // pageInfo.timeStamp = new Date().getTime();
-        this.$store.dispatch("VUEX_SETTING_IS_PAGE", true);
-        // this.$store.state.system.vuex_setting_from.isSettingPage = false;
-        // this.$store.state.system.vuex_setting_from.isSettingPage = !this.$store.state.system.vuex_setting_from.isSettingPage;
+    pageSet: function() { 
+        this.$store.dispatch("VUEX_SETTING_IS_PAGE", true); 
     }
   }
 };

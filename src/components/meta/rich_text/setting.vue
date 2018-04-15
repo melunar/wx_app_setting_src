@@ -74,7 +74,7 @@ export default {
                 paddingValue: this.paddingValue,  
                 richTextContent: this.richTextContent
             };
-            debugger
+            console.log("组件设置变更....");
             this.$store.dispatch("VUEX_SETTING_META", data);
         },
       initEditor: function(editorInstance) {

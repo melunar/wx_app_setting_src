@@ -15,9 +15,9 @@
             }">
             <span v-for="i in ImageList.length" :key="i" class="carousel-btn"
                 :class="{
-                    'carousel-btn-shape-circle': btnShape === 1,
+                    'carousel-btn-shape-circle': btnShape === 3,
                     'carousel-btn-shape-rect2': btnShape === 2,
-                    'carousel-btn-shape-rect': btnShape === 3
+                    'carousel-btn-shape-rect': btnShape === 1
                 }"
                 :style="{
                     'background-color': btnColor,

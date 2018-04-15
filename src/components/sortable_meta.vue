@@ -7,10 +7,11 @@
             {{"test " + metaName }}
         </div>
         <div class="hover-style"
+            @click="setEditStatus"
             :style="{'display': isCurrentSelect ? 'block' : 'none'}">
             <div class="tip-btns">
                 <span class="tip-btn" @click="setEditStatus">编辑</span>
-                <span class="tip-btn" @click="deleteMetaFromPage">删除</span>
+                <span class="tip-btn" @click.stop="deleteMetaFromPage">删除</span>
             </div>
         </div>
     </div>
@@ -44,10 +45,7 @@ export default {
         },
         richText: function (resolve) {
             require(["@/components/meta/rich_text/rich_text.vue"], resolve);
-        }
-        /* carouselSetting: function (resolve) {
-            require(["@/components/meta/carousel/setting.vue"], resolve);
-        }, */
+        } 
     },
     created: function() {},
     mounted: function() {},
@@ -57,7 +55,8 @@ export default {
         componentId: function() {
             if(this.metaId) {
                 var name = GC.metaListMap[this.metaType] ? GC.metaListMap[this.metaType].meta : "";
-                console.log("渲染组件：" + name);
+                var text = GC.metaListMap[this.metaType] ? GC.metaListMap[this.metaType].name : "--";
+                console.log("渲染组件：" + text);
                 return name;
             } 
             return "";
@@ -75,17 +74,23 @@ export default {
     methods: {
         // 编辑当前组件
         setEditStatus: function() {
-            var metaConfig = this.metaConfig; 
-            // this.$set(this.metaConfig, "metaType", this.metaType);
-            // this.$set(this.metaConfig, "metaId", this.metaId);
+            debugger
+            if(this.$store.state.system.vuex_setting_meta && this.$store.state.system.vuex_setting_meta.metaId === this.metaId && !this.$store.state.system.vuex_setting_is_page) {//重复触发同一个组件实例的编辑
+                return;
+            }
+            var metaConfig = this.metaConfig;  
             metaConfig.metaType = this.metaType;
             metaConfig.metaId = this.metaId;
+            console.log("编辑组件", metaConfig);
             debugger
             this.$store.dispatch("VUEX_SETTING_META", metaConfig);
         },
         // 删除组件
         deleteMetaFromPage: function() {
-
+            this.$emit("delMeta", { 
+                metaId: this.metaId,
+                metaType: this.metaType
+            });
         }
     }
 }
