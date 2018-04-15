@@ -4,7 +4,7 @@
             <!-- 这里强制使用24单位为了适配flex布局最大化宽度 -->
             <el-col :span="24"
                 v-for="(item, index) in metaInfo.menuList" :key="index"> 
-                <div class="grid-content" :data-href="item.linkUrl"
+                <div class="grid-content" :data-href="item.linkPageId"
                     :style="{
                         'border-right-color': metaInfo.lineColor,
                         'background-color': activeIndex === index ? metaInfo.activeBgColor : metaInfo.bgColor
@@ -38,10 +38,10 @@ export default {
     props: {
         /* menuList: {type: Array, default: function() {
             return [
-                {text: "消息", imgSrc: "", linkUrl: "#"},
-                {text: "联系人", imgSrc: "", linkUrl: "#"},
-                {text: "个人中心", imgSrc: "", linkUrl: "#"},
-                {text: "个人中心", imgSrc: "", linkUrl: "#"}
+                {text: "消息", imgSrc: "", linkPageId: "#"},
+                {text: "联系人", imgSrc: "", linkPageId: "#"},
+                {text: "个人中心", imgSrc: "", linkPageId: "#"},
+                {text: "个人中心", imgSrc: "", linkPageId: "#"}
             ]
         }}, //按钮列表 todo
         menuType: {type: Number, default: 1}, //按钮类型
@@ -54,10 +54,10 @@ export default {
         metaConfig: { type: Object, default: function() {
             return {
                 menuList: [
-                    {text: "消息", imgSrc: "", linkUrl: "#"},
-                    {text: "联系人", imgSrc: "", linkUrl: "#"},
-                    {text: "个人中心", imgSrc: "", linkUrl: "#"},
-                    {text: "个人中心", imgSrc: "", linkUrl: "#"}
+                    {text: "消息", imgSrc: "", linkPageId: "#"},
+                    {text: "联系人", imgSrc: "", linkPageId: "#"},
+                    {text: "个人中心", imgSrc: "", linkPageId: "#"},
+                    {text: "个人中心", imgSrc: "", linkPageId: "#"}
                 ],
                 menuType: 1,
                 bgColor: "#fff",

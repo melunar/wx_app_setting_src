@@ -3,7 +3,7 @@
     <div class="meta-base-image-display">
         <div class="image-container">
             <img v-for="(item, index) in ImageList" :key="index"
-                :data-href="item.linkUrl"
+                :data-href="item.linkPageId"
                 class="image-normal" :class="{'hide': type===1 && index > 0}"
                 :src="item.src | defaultImageUrl(index)">
         </div>
@@ -42,8 +42,8 @@ export default {
         //图集
         imageList: { type: Array, default: function() {
             return [
-                { src: "", linkUrl: "" },
-                { src: "", linkUrl: "" }
+                { src: "", linkPageId: "" },
+                { src: "", linkPageId: "" }
             ];
         } },
 

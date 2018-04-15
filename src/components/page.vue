@@ -128,7 +128,7 @@ export default {
             var metaName = GC.metaListMap[metaType].name; 
             this.metasBySort.map(function(item, index) {
                 if(metaId === item.metaId) { 
-                    this.$alert("确定要删除该" + metaName + "组件？", "警告", {
+                    this.$alert("确定要删除该" + metaName + "组件？", "提示", {
                         confirmButtonText: '删除',
                         callback: function() {
                             this.metasBySort.splice(index, 1); // 删除
@@ -140,7 +140,7 @@ export default {
                                 this.$store.dispatch("VUEX_SETTING_IS_PAGE", true);
                             }
                         }.bind(this)
-                    } )
+                    } );
                 } 
             }.bind(this));
         },

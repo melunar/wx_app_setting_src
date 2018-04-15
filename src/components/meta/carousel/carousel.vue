@@ -19,8 +19,8 @@ export default {
     mixins:[metaStyleUpdate],
     props: {
         /* imageList: {type: Array, default: function() { return [
-            { src: "", linkUrl: "#" },
-            { src: "", linkUrl: "#" }
+            { src: "", linkPageId: "#" },
+            { src: "", linkPageId: "#" }
         ] }},
         btnShape: {type: Number, default: 1},
         btnPosition: {type: Number, default: 3},
@@ -32,8 +32,8 @@ export default {
         metaConfig: { type: Object, default: function() {
             return {
                 imageList:  [
-                    { src: "", linkUrl: "#" },
-                    { src: "", linkUrl: "#" }
+                    { src: "", linkPageId: "#" },
+                    { src: "", linkPageId: "#" }
                 ],
                 btnShape: 1,
                 btnPosition: 3,

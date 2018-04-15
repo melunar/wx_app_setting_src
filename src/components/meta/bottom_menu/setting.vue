@@ -121,10 +121,10 @@ export default {
                 activeFontColor: this.activeFontColor //激活字体颜色
 
                 , menuList: [ // todo 
-                {text: "消息", imgSrc: "", linkUrl: "#"},
-                {text: "联系人", imgSrc: "", linkUrl: "#"},
-                {text: "个人中心", imgSrc: "", linkUrl: "#"},
-                {text: "个人中心", imgSrc: "", linkUrl: "#"}
+                {text: "消息", imgSrc: "", linkPageId: "#"},
+                {text: "联系人", imgSrc: "", linkPageId: "#"},
+                {text: "个人中心", imgSrc: "", linkPageId: "#"},
+                {text: "个人中心", imgSrc: "", linkPageId: "#"}
             ],
             };
             console.log("组件设置变更....");

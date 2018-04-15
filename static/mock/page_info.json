@@ -62,10 +62,10 @@
                 "fontColor": "#444", 
                 "activeFontColor": "#f44",
                 "menuList": [
-                    {"text": "消息", "imgSrc": "", "linkUrl": "#"},
-                    {"text": "联系人", "imgSrc": "", "linkUrl": "#"},
-                    {"text": "个人中心", "imgSrc": "", "linkUrl": "#"},
-                    {"text": "个人中心", "imgSrc": "", "linkUrl": "#"}
+                    {"text": "消息", "imgSrc": "", "linkPageId": "#"},
+                    {"text": "联系人", "imgSrc": "", "linkPageId": "#"},
+                    {"text": "个人中心", "imgSrc": "", "linkPageId": "#"},
+                    {"text": "个人中心", "imgSrc": "", "linkPageId": "#"}
                 ]
             }
         }]

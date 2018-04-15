@@ -28,6 +28,11 @@
             :tipsText="'最大是1'"
             :step="0.1"
             :max="1.0" :min="0.1" />
+        <imageUploads 
+            :maxLength="10"
+            :dataList="imageList"
+            :isText="true"
+        />
         <br><br>
         <el-button @click="consoleOut">输出参数（console）</el-button>
     </div>
@@ -38,6 +43,7 @@ import inputNormal from "../_base/input_normal.vue";
 import colorSelect from "../_base/color_select.vue";
 import radioGroup from "../_base/radio_group.vue";
 import numberSlider from "../_base/number_slider.vue";
+import imageUploads from "../_base/image_upload_list.vue";
 export default {
     name: "metaCarouselSetting",
     mixins:[],
@@ -72,7 +78,12 @@ export default {
                     // 按钮底部边距
                     btnMarginBottom: 5,
                     // 按钮透明度
-                    btnTransparency: 0.8
+                    btnTransparency: 0.8,
+                    //图片列表
+                    imageList:  [
+                        {imgSrc: "", linkPageId: ""},
+                        {imgSrc: "", linkPageId: ""}
+                    ]
                 }
             }
         }
@@ -89,6 +100,7 @@ export default {
             btnMarginLR: this.metaInfo.btnMarginLR,
             btnMarginBottom: this.metaInfo.btnMarginBottom,
             btnTransparency: this.metaInfo.btnTransparency, 
+            imageList: this.metaInfo.imageList,  
 
             btnShapeList: [ 
                 { value: 1, text: "长方形" },
@@ -104,7 +116,8 @@ export default {
     },
     components: {
         inputNormal,colorSelect,
-        radioGroup,numberSlider
+        radioGroup,numberSlider,
+        imageUploads
         /*requireDemo: function (resolve) {
             require([""], resolve);
         }*/
@@ -149,8 +162,8 @@ export default {
                 btnTransparency: this.btnTransparency 
 
                 , imageList: [ //todo
-                    { src: "", linkUrl: "#" },
-                    { src: "", linkUrl: "#" }
+                    { src: "", linkPageId: "#" },
+                    { src: "", linkPageId: "#" }
                 ],
             };
             console.log("组件设置变更....");
