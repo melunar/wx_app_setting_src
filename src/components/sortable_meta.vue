@@ -7,11 +7,10 @@
             {{"test " + metaName }}
         </div>
         <div class="hover-style"
-            :style="{'display': isCurrentSelect ? 'block' : 'none'}"
-            @click="setEditStatus">
+            :style="{'display': isCurrentSelect ? 'block' : 'none'}">
             <div class="tip-btns">
                 <span class="tip-btn" @click="setEditStatus">编辑</span>
-                <span class="tip-btn">删除</span>
+                <span class="tip-btn" @click="deleteMetaFromPage">删除</span>
             </div>
         </div>
     </div>
@@ -74,6 +73,7 @@ export default {
     watch: { 
     },
     methods: {
+        // 编辑当前组件
         setEditStatus: function() {
             var metaConfig = this.metaConfig; 
             // this.$set(this.metaConfig, "metaType", this.metaType);
@@ -82,6 +82,10 @@ export default {
             metaConfig.metaId = this.metaId;
             debugger
             this.$store.dispatch("VUEX_SETTING_META", metaConfig);
+        },
+        // 删除组件
+        deleteMetaFromPage: function() {
+
         }
     }
 }
@@ -94,7 +98,6 @@ export default {
         width: 100%; 
         min-height: 5px; /* test height */
         position: relative;
-        // margin-bottom: 3px; 
         overflow: hidden;
         &:hover { .hover-style { display: block !important; } }
         .hover-style { 

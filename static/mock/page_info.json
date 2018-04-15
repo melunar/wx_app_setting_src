@@ -13,7 +13,7 @@
         },
         "metas": [{
             "metaId": 343434511111,
-            "sort": 1,
+            "sort": 0,
             "type": "002",
             "text": "轮播图",
             "name": "carousel",
@@ -27,7 +27,7 @@
             }
         },{
             "metaId": 3451151111,
-            "sort": 2,
+            "sort": 1,
             "type": "001",
             "config": {
                 "bgColor": "#1ff",  
@@ -36,7 +36,7 @@
             }
         },{
             "metaId": 343434432222,
-            "sort": 3,
+            "sort": 2,
             "type": "002",
             "text": "轮播图",
             "name": "carousel",
@@ -50,7 +50,7 @@
             }
         },{
             "metaId": 36434344322345,
-            "sort": 4,
+            "sort": 3,
             "type": "003",
             "text": "自定义菜单",
             "name": "bottomMenu",

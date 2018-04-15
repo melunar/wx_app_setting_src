@@ -120,9 +120,15 @@ export default {
         }, */
         // draggableChoose: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger},
         draggableSort: function(e,a,b) {
-            console.log("-----托拉拽操作：" + e.type);console.log("-----托拉拽操作：" + e.type);
-            console.log("-----          newIndex：" + e.newIndex);
-            console.log("-----          oldIndex：" + e.oldIndex);
+            //console.log("-----托拉拽操作：" + e.type);console.log("-----托拉拽操作：" + e.type);
+            //console.log("-----托拉拽操作：" + e.type);console.log("-----托拉拽操作：" + e.type);
+            //console.log("-----          newIndex：" + e.newIndex);
+            //console.log("-----          oldIndex：" + e.oldIndex);
+            // this.metasBySort 在拖拽组件作用下会自动重拍 这里处理下内部的sort属性即可
+            console.log("----- 拖拽重排");
+            this.metasBySort.map(function(item, index) {
+                this.metasBySort[index].sort = index;
+            }.bind(this));
         },
         // draggableFilter: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger},
         // draggableClone: function(e,a,b) {console.log("-----托拉拽操作：" + e.type);debugger}

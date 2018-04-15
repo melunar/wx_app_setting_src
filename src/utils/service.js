@@ -25,20 +25,6 @@ export const register = () => {
 import axios from 'axios';
 // import urlList from "./service_conf.js";
 var urlList = require("./service_conf.js").default;
-var config = [
-  {url: "gateway/sys/conf_setting", type: "get", params: "", isRequestBody: false}
-];
-
-
-
-
-var httpTest = axios.get(config[0].url, {params: config[0].params})
-
-// module.exports = httpTest;
-
-/* httpTest.then(function(res) {
-  console.log(res);
-}); */
 
 window.SERVICE = function(name, params, successCallback, errorCallback) {
   var curUrl = urlList[name],
@@ -61,4 +47,4 @@ window.SERVICE = function(name, params, successCallback, errorCallback) {
     }
 }
 
-export default httpTest;
+// export default httpTest;
