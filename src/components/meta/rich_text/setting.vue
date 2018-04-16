@@ -10,7 +10,9 @@
             :tipsText="'px'"
             :max="50" :min="0" />
         <!-- vueUEditor.ueditorPath注意路径别少了最后的斜杠 -->
-        <vueUEditor @ready="initEditor" :ueditorPath="'/static/ueditor1_4_3_3/'" />
+        <vueUEditor @ready="initEditor" 
+            :ueditorConfig="{'serverUrl': 'https://jsonplaceholder.typicode.com/posts/'}"
+            :ueditorPath="'/static/ueditor1_4_3_3/'" />
     </div>
 </template>
 

@@ -24,6 +24,11 @@
             :labelText="'选中文字颜色'"
             v-model="activeFontColor"
             :defaultColor="'#666'" />
+        <imageUploads 
+            :maxLength="6"
+            :dataList="menuList"
+            :isText="menuType === 1"
+            @change="getNewImages" />
         <br><br>
         <el-button @click="consoleOut">输出参数（console）</el-button>
     </div>
@@ -32,6 +37,7 @@
 <script>
 import colorSelect from "../_base/color_select.vue";
 import radioGroup from "../_base/radio_group.vue"; 
+import imageUploads from "../_base/image_upload_list.vue";
 export default {
     name: "bottomMenuSetting",
     mixins:[],
@@ -54,6 +60,11 @@ export default {
                     lineColor: "#fff", //边框颜色
                     fontColor: "#666",//字体颜色
                     activeFontColor: "#666" //激活字体颜色
+                    , menuList: [
+                        {text: "", imgSrc: "", linkPageId: ""},
+                        {text: "", imgSrc: "", linkPageId: ""},
+                        {text: "", imgSrc: "", linkPageId: ""}
+                    ]
                 }
             }
         }
@@ -70,6 +81,7 @@ export default {
             lineColor: this.metaInfo.lineColor,
             fontColor: this.metaInfo.fontColor,
             activeFontColor: this.metaInfo.activeFontColor,
+            menuList: this.metaInfo.menuList,
             
             menuTypeList: [ //按钮类型列举
                 { value: 1, text: "图片+文字" },
@@ -78,7 +90,7 @@ export default {
         };
     },
     components: {
-        colorSelect, radioGroup
+        colorSelect, radioGroup, imageUploads
         /*requireDemo: function (resolve) {
             require([""], resolve);
         }*/
@@ -105,9 +117,16 @@ export default {
         },
         "activeFontColor": function() {
             this.dispatchNewStore();
+        },
+        "menuList": function() {
+            this.dispatchNewStore();
         }
     },
     methods: {
+        // 图片更新
+        getNewImages: function(newList) {
+            this.menuList = newList;
+        },
         //更新属性数据
         dispatchNewStore: function() {
             var data = {
@@ -120,12 +139,13 @@ export default {
                 fontColor: this.fontColor,//字体颜色
                 activeFontColor: this.activeFontColor //激活字体颜色
 
-                , menuList: [ // todo 
-                {text: "消息", imgSrc: "", linkPageId: "#"},
-                {text: "联系人", imgSrc: "", linkPageId: "#"},
-                {text: "个人中心", imgSrc: "", linkPageId: "#"},
-                {text: "个人中心", imgSrc: "", linkPageId: "#"}
-            ],
+                , menuList: this.menuList
+                /* [  
+                    {text: "消息", imgSrc: "", linkPageId: "#"},
+                    {text: "联系人", imgSrc: "", linkPageId: "#"},
+                    {text: "个人中心", imgSrc: "", linkPageId: "#"},
+                    {text: "个人中心", imgSrc: "", linkPageId: "#"}
+                ] */
             };
             console.log("组件设置变更....");
             this.$store.dispatch("VUEX_SETTING_META", data);

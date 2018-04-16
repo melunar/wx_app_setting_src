@@ -2,10 +2,10 @@
     <!-- 用于图片轮播和图片橱窗 等元组件使用 -->
     <div class="meta-base-image-display">
         <div class="image-container">
-            <img v-for="(item, index) in ImageList" :key="index"
+            <img v-for="(item, index) in imageList" :key="index"
                 :data-href="item.linkPageId"
                 class="image-normal" :class="{'hide': type===1 && index > 0}"
-                :src="item.src | defaultImageUrl(index)">
+                :src="item.imgSrc | defaultImageUrl(index)">
         </div>
         <div v-if="type===1" class="images-carousel-btns"
             :class="{
@@ -13,7 +13,7 @@
                 'carousel-btn-center': btnPosition === 2,
                 'carousel-btn-right': btnPosition === 3
             }">
-            <span v-for="i in ImageList.length" :key="i" class="carousel-btn"
+            <span v-for="i in imageList.length" :key="i" class="carousel-btn"
                 :class="{
                     'carousel-btn-shape-circle': btnShape === 3,
                     'carousel-btn-shape-rect2': btnShape === 2,
@@ -42,8 +42,8 @@ export default {
         //图集
         imageList: { type: Array, default: function() {
             return [
-                { src: "", linkPageId: "" },
-                { src: "", linkPageId: "" }
+                { imgSrc: "", linkPageId: "" },
+                { imgSrc: "", linkPageId: "" }
             ];
         } },
 
@@ -63,7 +63,7 @@ export default {
     },
     data: function() {
         return {
-            ImageList: this.imageList
+            // ImageList: this.imageList
         };
     },
     components: {
@@ -75,7 +75,11 @@ export default {
     mounted: function() {},
     beforeDestroy: function() {},
     computed: {},
-    watch: {},
+    watch: {
+        /* "imageList": function() {
+
+        } */
+    },
     methods: {
         
     },

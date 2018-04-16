@@ -32,7 +32,7 @@
             :maxLength="10"
             :dataList="imageList"
             :isText="true"
-        />
+            @change="getNewImages" />
         <br><br>
         <el-button @click="consoleOut">输出参数（console）</el-button>
     </div>
@@ -134,6 +134,7 @@ export default {
                 btnMarginLR: this.btnMarginLR,
                 btnMarginBottom: this.btnMarginBottom,
                 btnTransparency: this.btnTransparency, 
+                imageList: this.imageList
             });
         }
     },
@@ -148,6 +149,10 @@ export default {
         }
     },
     methods: {
+        // 图片上传更新
+        getNewImages: function(imageList) {
+            this.imageList = imageList;
+        },
         //更新属性数据
         dispatchNewStore: function() {
             var data = {
@@ -161,10 +166,7 @@ export default {
                 btnMarginBottom: this.btnMarginBottom,
                 btnTransparency: this.btnTransparency 
 
-                , imageList: [ //todo
-                    { src: "", linkPageId: "#" },
-                    { src: "", linkPageId: "#" }
-                ],
+                , imageList: this.imageList,
             };
             console.log("组件设置变更....");
             this.$store.dispatch("VUEX_SETTING_META", data);

@@ -32,8 +32,8 @@ export default {
         metaConfig: { type: Object, default: function() {
             return {
                 imageList:  [
-                    { src: "", linkPageId: "#" },
-                    { src: "", linkPageId: "#" }
+                    { imgSrc: "", linkPageId: "#" },
+                    { imgSrc: "", linkPageId: "#" }
                 ],
                 btnShape: 1,
                 btnPosition: 3,

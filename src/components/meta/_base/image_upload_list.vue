@@ -5,21 +5,24 @@
             <draggable v-model="listBySort" @sort="draggableSort"> 
                 <div v-for="(item, index) in listBySort" :key="index" class="upload-content">
                     <div class="image-box">
-                        <img src="" alt="">
+                        <img class="image-self" v-if="item.imgSrc" :src="item.imgSrc">
+                        <img class="image-self" v-if="item.imgSrc">
                     </div>
                     <div class="upload-form">
                         <el-input size="small" disabled placeholder="图片地址" v-model="item.imgSrc">
                             <template slot="append">
-                                <el-upload class="upload-demo"
+                                <el-upload
                                     action="https://jsonplaceholder.typicode.com/posts/"
                                     :on-preview="handlePreview"
                                     :on-remove="handleRemove"
                                     :before-remove="beforeRemove"
+                                    :on-success="handleSuccess"
+                                    :on-error="handleError"
                                     :multiple="false"
                                     :show-file-list="false"
                                     :on-exceed="handleExceed"
                                     :file-list="item.imgSrc ? [{'name': item.imgSrc, 'url': item.imgSrc}] : []">
-                                    <el-button style="position: relative; top: 4px;" size="small" type="primary">选择图片</el-button>
+                                    <el-button style="position: relative; top: 4px;" size="small" type="primary" @click="rememberIndex(index)">选择图片</el-button>
                                     <div slot="tip" class="el-upload__tip"></div>
                                     </el-upload> 
                             </template>
@@ -30,14 +33,14 @@
                                  <el-button size="small" type="primary">链接地址</el-button>
                             </template>
                         </el-input>
-                        <temlate v-if="isText">
+                        <template v-if="isText">
                             <span class="split-space"></span>
                             <el-input size="small" placeholder="添加文本" v-model="item.text">
                                 <template slot="append">
                                     <el-button size="small" type="primary">文字</el-button>
                                 </template>
                             </el-input>
-                        </temlate>
+                        </template>
                     </div>
                     <span class="del-btn" @click="deleteOne(item, index)">×</span>
                     <!-- <el-upload class="upload-demo"
@@ -114,7 +117,8 @@ export default {
         addOne: function() {
             this.listBySort.splice(this.listBySort.length, 0, {
                 imgSrc: "", linkPageId: "", text: ""
-            })
+            });
+            this.$emit("change", this.listBySort);
         },
         // 删除
         deleteOne: function(item, index) {
@@ -122,6 +126,7 @@ export default {
                 confirmButtonText: '删除',
                 callback: function() {
                     this.listBySort.splice(index, 1);
+                    this.$emit("change", this.listBySort);
                 }.bind(this)
             });
         },
@@ -137,11 +142,40 @@ export default {
             console.log("....handleExceed");
             this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
         },
+        // 上传成功
+        handleSuccess: function(res, fileList) {
+            var fileName = fileList.name;
+            message.success(`上传${fileName}成功！`);
+            if(typeof this.curIndex === "undefined") {
+                message.error("error, code = 0");
+                return;
+            } 
+            this.listBySort[this.curIndex].imgSrc = fileList.url;
+            this.$emit("change", this.listBySort);
+            /*  demo
+                fileList: "{"status":"success","name":"menu-1.png","size":9038,"percentage":100,"uid":1523893568208,"raw":{"uid":1523893568208},"url":"blob:http://localhost:4002/50b3e3be-8e08-46d5-b5f5-d7bef17d8726","response":{"id":101}}"
+             */
+            console.log("....handleSuccess"); 
+        },
+        // 上传失败
+        handleError: function() {
+            message.error("上传失败！");
+            console.log("....handleError"); 
+        },
         beforeRemove: function(file, fileList) {
             console.log("....beforeRemove");
             return this.$confirm(`确定移除 ${ file.name }？`);
         },
-        draggableSort: function() {}
+        draggableSort: function() {
+            setTimeout(function() {
+                this.$emit("change", this.listBySort);
+            }.bind(this));
+        },
+        // 记录当前操作的索引 用于上传成功赋值
+        rememberIndex: function(index) {
+            this.curIndex = index;
+            console.log(`当前操作NO.${index}`);
+        }
     },
     filters: { 
     }
@@ -165,7 +199,9 @@ export default {
             overflow: hidden;
         }
         .image-box {
-            height: 70px;
+            max-height: 110px;
+            min-height: 40px;
+            height: auto;
             width: auto;
             min-width: 40px;
             max-width: 220px;
@@ -174,6 +210,10 @@ export default {
             margin-right: 10px;
             border: 1px solid #e7eaec;
             position: relative;   
+            overflow: hidden;
+        }
+        .image-self {
+
         }
         .upload-form {
             height: auto;
