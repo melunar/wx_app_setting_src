@@ -1,0 +1,60 @@
+{
+    "data": {
+        "id": 543234523,
+        "config": {
+            "pageName": "页面名称（接口）",
+            "pageTitle": "页面标题（接口）",
+            "pageBgColor": "#eee",
+            "pageBgColorDefault": "#fff",
+            "pageHeaderBgColor": "#aaa",
+            "pageHeaderBgColorDefault": "#fff",
+            "pageHeaderColor": 2
+        },
+        "metas": [{
+            "metaId": 343434511111,
+            "sort": 0,
+            "type": "002",
+            "text": "轮播图",
+            "name": "carousel",
+            "config": {
+                "btnShape": 3,
+                "btnPosition": 2,
+                "btnColor": "#fff",
+                "btnMarginLR": 5,
+                "btnMarginBottom": 5,
+                "btnTransparency": 0.8,
+                "imageList":  [
+                    { "src": "", "linkPageId": "" },
+                    { "src": "", "linkPageId": "" }
+                ]
+            }
+        },{
+            "metaId": 3451151111,
+            "sort": 1,
+            "type": "001",
+            "config": {
+                "bgColor": "#1ff",  
+                "paddingValue": 30,  
+                "richTextContent": "<b>123:这是富文本</b><br><hr><h3>标题</h3>"
+            }
+        },{
+            "metaId": 36434344322345,
+            "sort": 3,
+            "type": "003",
+            "config": {
+                "menuType": 1,
+                "bgColor": "#400",
+                "activeBgColor": "#400",
+                "lineColor": "#f44", 
+                "fontColor": "#444", 
+                "activeFontColor": "#f44",
+                "menuList": [
+                    {"text": "消息", "imgSrc": "", "linkPageId": ""},
+                    {"text": "联系人", "imgSrc": "", "linkPageId": ""},
+                    {"text": "个人中心", "imgSrc": "", "linkPageId": ""},
+                    {"text": "个人中心", "imgSrc": "", "linkPageId": ""}
+                ]
+            }
+        }]
+    }
+}
