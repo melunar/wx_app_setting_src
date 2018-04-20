@@ -6,10 +6,14 @@ export default {
     },
     watch: {
         // 监听设置项变化
-        "meta_setting": function(config) { 
-            if(this.metaId && config.metaId === this.metaId && !config.isDefaultConfig) {
-                this.metaInfo = config; 
+        meta_setting: function(config) {
+            if (
+                this.metaId &&
+                config.metaId === this.metaId &&
+                !config.isDefaultConfig
+            ) {
+                this.metaInfo = config;
             }
         }
     }
-}
+};

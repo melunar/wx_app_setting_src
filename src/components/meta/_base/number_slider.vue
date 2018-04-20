@@ -1,42 +1,38 @@
 <template>
-    <div class="setting-meta-slider">
-        <baseLine :labelText="labelText">
-            <template slot="settingBaseLineSlot">
-                <el-slider style="width: 100%; height: 35px;"
-                    v-model="_value" :max="max" :min="min" :step="step" />
-                <span class="slider-tip"> {{ _value }}({{ tipsText }}) </span>
-            </template>
-        </baseLine>
-    </div>
+<div class="setting-meta-slider">
+    <baseLine :labelText="labelText">
+        <template slot="settingBaseLineSlot">
+            <el-slider style="width: 100%; height: 35px;"
+                v-model="_value" :max="max" :min="min" :step="step" />
+            <span class="slider-tip"> {{ _value }}({{ tipsText }}) </span>
+        </template>
+    </baseLine>
+</div>
 </template>
 
 <script>
 import baseLine from "./base_line.vue";
 export default {
     name: "settingMetaSlider",
-    mixins:[],
-    props: { 
+    mixins: [],
+    props: {
         // 标签文字
-        labelText: {type: String, default: "未知属性"},
+        labelText: { type: String, default: "未知属性" },
         // 单位名称或提示
-        tipsText: {type: String, default: "单位"},
+        tipsText: { type: String, default: "单位" },
         // 最大值
-        max: {type: Number, default: 100},
+        max: { type: Number, default: 100 },
         // 单位名称或提示
-        min: {type: Number, default: 0},
- 
-        // 步长
-        step: {type: Number, default: 1},
+        min: { type: Number, default: 0 },
 
-        
+        // 步长
+        step: { type: Number, default: 1 },
+
         // 默认值
-        value: {type: Number, default: 0},
-        
+        value: { type: Number, default: 0 }
     },
     data: function() {
-        return {
-            //myVlaue: this.modelVlaue
-        };
+        return {};
     },
     components: {
         baseLine
@@ -49,27 +45,24 @@ export default {
     beforeDestroy: function() {},
     computed: {
         _value: {
-            get: function () {
+            get: function() {
                 return this.value;
             },
-            set: function (val) {
+            set: function(val) {
                 this.$emit("input", val);
             }
         }
     },
     watch: {},
-    methods: {
-
-    }
-}
+    methods: {}
+};
 </script>
 
 <style scoped lang="less">
-    //@import "../less/variables.less";
-    //@import "../less/sprite.less";
-    .setting-meta-input {
-        position: relative;  width: 100%;
-
-         
-    }
+//@import "../less/variables.less";
+//@import "../less/sprite.less";
+.setting-meta-input {
+    position: relative;
+    width: 100%;
+}
 </style>

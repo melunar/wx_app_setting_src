@@ -1,34 +1,31 @@
 <template>
-    <div class="page-setting">
-        <inputNormal 
-            v-model="PageName"
-            :labelText="'页面名称'"
-            :isShowTips="true"
-            :tipsContent="'注意：页面名称是便于后台查找，页面标题是手机端标题'" />
-        <inputNormal 
-            v-model="PageTitle"
-            :labelText="'页面标题'" />
-        <colorSelect 
-            :labelText="'页面颜色'"
-            v-model="PageBgColor"
-            @change="getPageBgColor"
-            :defaultColor="PageBgColorDefault" />
-        <colorSelect 
-            :labelText="'顶部背景颜色'"
-            v-model="PageHeaderBgColor"
-            :defaultColor="PageHeaderBgColorDefault" />
-        <radioGroup 
-            v-model="PageHeaderColor"
-            :labelText="'顶部文字颜色'"
-            :radioArray="PageHeaderColorList" />
-        <numberSlider 
-            v-model="MarginValue"
-            :labelText="'页面边距'"
-            :tipsText="'px'"
-            :max="20" :min="0" />
-        <br><br>
-        <el-button @click="consoleOut">输出参数（console）</el-button>
-    </div>
+<div class="page-setting">
+    <inputNormal 
+        v-model="PageName"
+        :labelText="'页面名称'"
+        :isShowTips="true"
+        :tipsContent="'注意：页面名称是便于后台查找，页面标题是手机端标题'" />
+    <inputNormal 
+        v-model="PageTitle"
+        :labelText="'页面标题'" />
+    <colorSelect 
+        :labelText="'页面颜色'"
+        v-model="PageBgColor"
+        :defaultColor="PageBgColorDefault" />
+    <colorSelect 
+        :labelText="'顶部背景颜色'"
+        v-model="PageHeaderBgColor"
+        :defaultColor="PageHeaderBgColorDefault" />
+    <radioGroup 
+        v-model="PageHeaderColor"
+        :labelText="'顶部文字颜色'"
+        :radioArray="PageHeaderColorList" />
+    <numberSlider 
+        v-model="MarginValue"
+        :labelText="'页面边距'"
+        :tipsText="'px'"
+        :max="20" :min="0" />
+</div>
 </template>
 
 <script>
@@ -38,20 +35,20 @@ import radioGroup from "../_base/radio_group.vue";
 import numberSlider from "../_base/number_slider.vue";
 export default {
     name: "pageMetaSetting",
-    mixins:[],
+    mixins: [],
     props: {
         // 页面名称 用于列表展示名称
-        pageName: {type: String, default: "未命名页面"},
+        pageName: { type: String, default: "未命名页面" },
         // 页面标题 用于页面内容展示
-        pageTitle: {type: String, default: "未命名标题"},
+        pageTitle: { type: String, default: "未命名标题" },
         // 页面背景色
-        pageBgColor: {type: String, default: "#FFF"},
+        pageBgColor: { type: String, default: "#FFF" },
         // 页面顶部背景色
-        pageHeaderBgColor: {type: String, default: "#EEE"},
+        pageHeaderBgColor: { type: String, default: "#EEE" },
         // 页面顶部文字背景色
-        pageHeaderColor: {type: Number, default: 1},
+        pageHeaderColor: { type: Number, default: 1 },
         // 页面边距
-        marginValue: {type: Number, default: 0}
+        marginValue: { type: Number, default: 0 }
     },
     data: function() {
         return {
@@ -63,15 +60,18 @@ export default {
             PageHeaderBgColorDefault: "#FFF",
             PageHeaderColor: this.pageHeaderColor,
             MarginValue: this.marginValue,
-            PageHeaderColorList: [ // 顶部文字颜色列举
+            PageHeaderColorList: [
+                // 顶部文字颜色列举
                 { value: 1, text: "黑色" },
                 { value: 2, text: "白色" }
             ]
         };
     },
     components: {
-        inputNormal,colorSelect,
-        radioGroup,numberSlider
+        inputNormal,
+        colorSelect,
+        radioGroup,
+        numberSlider
         /*requireDemo: function (resolve) {
             require([""], resolve);
         }*/
@@ -79,28 +79,25 @@ export default {
     created: function() {},
     mounted: function() {},
     beforeDestroy: function() {},
-    computed: {
-        
-    },
+    computed: {},
     watch: {
         /* 监听属性值改变 对外变更store start */
-        /* 注意数组不能监听 建议走组件事件通知 */
-        "PageName": function(val) { 
+        PageName: function(val) {
             this.dispatchNewStore();
         },
-        "PageTitle": function(val) { 
+        PageTitle: function(val) {
             this.dispatchNewStore();
         },
-        "PageBgColor": function(val) { 
+        PageBgColor: function(val) {
             this.dispatchNewStore();
         },
-        "PageHeaderBgColor": function(val) { 
+        PageHeaderBgColor: function(val) {
             this.dispatchNewStore();
         },
-        "PageHeaderColor": function(val) { 
+        PageHeaderColor: function(val) {
             this.dispatchNewStore();
         },
-        "MarginValue": function(val) { 
+        MarginValue: function(val) {
             this.dispatchNewStore();
         }
         /* 监听属性值改变 对外变更store end */
@@ -109,37 +106,24 @@ export default {
         //更新属性数据
         dispatchNewStore: function() {
             var data = {
-                "pageName": this.PageName, 
-                "pageTitle": this.PageTitle, 
-                "pageBgColor": this.PageBgColor, 
-                "pageHeaderBgColor": this.PageHeaderBgColor,  
-                "pageHeaderColor": this.PageHeaderColor, 
-                "marginValue": this.MarginValue
+                pageName: this.PageName,
+                pageTitle: this.PageTitle,
+                pageBgColor: this.PageBgColor,
+                pageHeaderBgColor: this.PageHeaderBgColor,
+                pageHeaderColor: this.PageHeaderColor,
+                marginValue: this.MarginValue
             };
-            console.log("页面设置变更....");
+            console.log("页面做了新的设置....");
             this.$store.dispatch("VUEX_SETTING_PAGE", data);
-        },
-       consoleOut: function() {
-           console.group("\/***page setting output");
-           console.log("pageName = " + this.PageName);
-           console.log("pageTitle = " + this.PageTitle);
-           console.log("pageBgColor = " + this.PageBgColor);
-           console.log("pageHeaderBgColor = " + this.PageHeaderBgColor);
-           console.log("pageHeaderColor = " + this.PageHeaderColor);
-           console.log("marginValue = " + this.MarginValue);
-           console.groupEnd("page setting output***\/");
-       },
-       getPageBgColor: function(color) {
-           //message.info("getPageBgColor = " + color);
-       }
+        }
     }
-}
+};
 </script>
 
 <style scoped lang="less">
-    //@import "../less/variables.less";
-    //@import "../less/sprite.less";
-    .page-setting {
-        
-    }
+//@import "../less/variables.less";
+//@import "../less/sprite.less";
+.page-setting {
+    position: relative;
+}
 </style>

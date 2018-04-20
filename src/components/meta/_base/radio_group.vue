@@ -1,34 +1,37 @@
 <template>
-    <div class="setting-meta-radio-group">
-        <baseLine :labelText="labelText">
-            <template slot="settingBaseLineSlot">
-                <el-radio-group style="margin: 7px 0 0;" v-model="_value">
-                    <el-radio v-for="(item, index) in radioArray" :key="index" 
-                        :label="item.value">{{ item.text }}</el-radio>
-                </el-radio-group>
-            </template>
-        </baseLine>
-    </div>
+<div class="setting-meta-radio-group">
+    <baseLine :labelText="labelText">
+        <template slot="settingBaseLineSlot">
+            <el-radio-group style="margin: 7px 0 0;" v-model="_value">
+                <el-radio v-for="(item, index) in radioArray" :key="index" 
+                    :label="item.value">{{ item.text }}</el-radio>
+            </el-radio-group>
+        </template>
+    </baseLine>
+</div>
 </template>
 
 <script>
 import baseLine from "./base_line.vue";
 export default {
     name: "settingMetaRadioGroup",
-    mixins:[],
-    props: { 
+    mixins: [],
+    props: {
         // 标签文字
-        labelText: {type: String, default: "未知属性"},
+        labelText: { type: String, default: "未知属性" },
         // 选项数组
-        radioArray: {type: Array, default: function() { return [] }},
-        
+        radioArray: {
+            type: Array,
+            default: function() {
+                return [];
+            }
+        },
+
         // model
-        value: {type: Number, default: 0}
+        value: { type: Number, default: 0 }
     },
     data: function() {
-        return {
-            //myValue: this.value
-        };
+        return {};
     },
     components: {
         baseLine
@@ -39,29 +42,26 @@ export default {
     created: function() {},
     mounted: function() {},
     beforeDestroy: function() {},
-    computed: { 
+    computed: {
         _value: {
-            get: function () {
+            get: function() {
                 return this.value;
             },
-            set: function (val) {
+            set: function(val) {
                 this.$emit("input", val);
             }
-        } 
+        }
     },
     watch: {},
-    methods: {
-
-    }
-}
+    methods: {}
+};
 </script>
 
 <style scoped lang="less">
-    //@import "../less/variables.less";
-    //@import "../less/sprite.less";
-    .setting-meta-radio-group {
-        position: relative;  width: 100%;
-
-      
-    }
+//@import "../less/variables.less";
+//@import "../less/sprite.less";
+.setting-meta-radio-group {
+    position: relative;
+    width: 100%;
+}
 </style>

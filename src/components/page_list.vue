@@ -28,93 +28,99 @@
 
 <script>
 export default {
-  name: "pageList",
-  mixins: [],
-  data: function() {
-    return {
-      pageListArr: []
-    };
-  },
-  components: {
-    /*requireDemo: function (resolve) {
+    name: "pageList",
+    mixins: [],
+    data: function() {
+        return {
+            pageListArr: []
+        };
+    },
+    components: {
+        /*requireDemo: function (resolve) {
             require([""], resolve);
         }*/
-  },
-  created: function() {
-    this.getPageList();
-  },
-  mounted: function() {
-    
-  },
-  beforeDestroy: function() {},
-  computed: {},
-  watch: {},
-  methods: {
-    //获取当前模板的页面列表
-    getPageList: function() {
-      var param = null;
-      SERVICE("templatePagesList", param, function(res) {
-        this.pageListArr = res.data;
-        if(res.data && res.data.forEach && res.data.length) {
-          this.getPageInfo(0); //激活第一个页面
+    },
+    created: function() {
+        this.getPageList();
+    },
+    mounted: function() {},
+    beforeDestroy: function() {},
+    computed: {},
+    watch: {},
+    methods: {
+        //获取当前模板的页面列表
+        getPageList: function() {
+            var param = null;
+            SERVICE(
+                "templatePagesList",
+                param,
+                function(res) {
+                    this.pageListArr = res.data;
+                    if (res.data && res.data.forEach && res.data.length) {
+                        this.getPageInfo(0); //激活第一个页面
+                    }
+                }.bind(this)
+            );
+        },
+        //获取页面的所有信息
+        getPageInfo: function(index, isId) {
+            var param = {
+                id: isId ? index : this.pageListArr[index].id
+            };
+            SERVICE(
+                "pageInfo",
+                param,
+                function(res) {
+                    this.setCurPageStore(res.data);
+                }.bind(this)
+            );
+        },
+        addNewPage: function() {
+            var newPageObj = {
+                id: new Date().getTime(),
+                title: "未命名页面",
+                isHomePage: false
+            };
+            this.pageListArr.push(newPageObj);
+        },
+        setHomePage: function(row, flag) {
+            var length = this.pageListArr.length;
+            for (var i = 0; i < length; i++) {
+                if (this.pageListArr[i].id === row.id) {
+                    this.pageListArr[i].isHomePage = true;
+                } else {
+                    this.pageListArr[i].isHomePage = false;
+                }
+            }
+        },
+        editPage: function(row) {
+            var id = row.id;
+            this.getPageInfo(id, true);
+        },
+        deletePage: function(row) {
+            var length = this.pageListArr.length;
+            for (var i = 0; i < length; i++) {
+                if (this.pageListArr[i].id === row.id) {
+                    this.pageListArr.splice(i, 1);
+                    break;
+                }
+            }
+        },
+        //设置页面配置的参数
+        setCurPageStore: function(pageInfo) {
+            if (!pageInfo.config) {
+                message.error("获取页面配置失败！");
+                return;
+            }
+            this.$store.dispatch("VUEX_SETTING_PAGE", pageInfo.config);
+            this.$store.dispatch("VUEX_SETTING_IS_PAGE", true);
+            if (!pageInfo.metas) {
+                message.error("获取页面组件！");
+                return;
+            }
+            this.$store.dispatch("VUEX_PAGE_METAS", pageInfo.metas);
         }
-      }.bind(this));
-    },
-    //获取页面的所有信息
-    getPageInfo: function(index, isId) {
-      var param = {
-        id: isId ? index : this.pageListArr[index].id
-      };
-      SERVICE("pageInfo", param, function(res) { 
-        this.setCurPageStore(res.data);
-      }.bind(this));
-    },
-    addNewPage: function() {
-      var newPageObj = {
-        id: new Date().getTime(),
-        title: "未命名页面",
-        isHomePage: false
-      };
-      this.pageListArr.push(newPageObj);
-    },
-    setHomePage: function(row, flag) {
-      var length = this.pageListArr.length;
-      for (var i = 0; i < length; i++) {
-        if (this.pageListArr[i].id === row.id) {
-          this.pageListArr[i].isHomePage = true;
-        } else {
-          this.pageListArr[i].isHomePage = false;
-        }
-      }
-    },
-    editPage: function(row) {
-      var id = row.id;
-      this.getPageInfo(id, true);
-    },
-    deletePage: function(row) {
-      var length = this.pageListArr.length;
-      for (var i = 0; i < length; i++) {
-        if (this.pageListArr[i].id === row.id) {
-          this.pageListArr.splice(i, 1);
-          break;
-        }
-      }
-    },
-    //设置页面配置的参数 
-    setCurPageStore: function(pageInfo) {
-      if(!pageInfo.config) {
-        message.error("获取页面配置失败！");
-        return;
-      }
-      this.$store.dispatch("VUEX_SETTING_PAGE", pageInfo.config);
-      this.$store.dispatch("VUEX_SETTING_IS_PAGE", true);
-      if(!pageInfo.metas) {
-        message.error("获取页面组件！");
-        return;
-      }
-      this.$store.dispatch("VUEX_PAGE_METAS", pageInfo.metas);
     }
-  }
 };
 </script>
 
@@ -122,62 +128,62 @@ export default {
 @import "../less/variables.less";
 //@import "../less/sprite.less";
 .page-manager {
-  display: inline-block;
-  height: 100%;
-  width: 325px;
-  background-color: @pageListBgColor;
-  overflow-y: auto;
-  .page-list-header {
-    height: 50px;
-    line-height: 50px;
-    width: 100%;
-    padding: 0 20px;
-    font-size: 16px;
-  }
-  .plh-add {
-    float: right;
-    margin-top: 16px;
-    font-size: 18px;
-    cursor: pointer;
-  }
-  .page-list-content {
-    border-top: 1px solid #e1e1e1;
-  }
-  .btn-set-home {
     display: inline-block;
-    font-size: 12px;
-    height: 20px;
-    width: 20px;
-    text-align: center;
-    border-radius: 3px;
-    cursor: pointer;
-    &.is-home {
-      background: #3a8ee6;
-      color: #fff;
+    height: 100%;
+    width: 325px;
+    background-color: @pageListBgColor;
+    overflow-y: auto;
+    .page-list-header {
+        height: 50px;
+        line-height: 50px;
+        width: 100%;
+        padding: 0 20px;
+        font-size: 16px;
     }
-    &.not-home {
-      background: #909399;
-      color: #fff;
+    .plh-add {
+        float: right;
+        margin-top: 16px;
+        font-size: 18px;
+        cursor: pointer;
     }
-  }
-  .btn-operate {
-    height: 20px;
-    width: 20px;
-    display: inline-block;
-    font-size: 10px;
-    float: left;
-    line-height: 20px;
-    color: #fff;
-    border-radius: 3px;
-    text-align: center;
-    cursor: pointer;
-    &.edit {
-      background: #3a8ee6;
+    .page-list-content {
+        border-top: 1px solid #e1e1e1;
     }
-    &.delete {
-      margin-left: 6px;
-      background: red;
+    .btn-set-home {
+        display: inline-block;
+        font-size: 12px;
+        height: 20px;
+        width: 20px;
+        text-align: center;
+        border-radius: 3px;
+        cursor: pointer;
+        &.is-home {
+            background: #3a8ee6;
+            color: #fff;
+        }
+        &.not-home {
+            background: #909399;
+            color: #fff;
+        }
     }
-  }
+    .btn-operate {
+        height: 20px;
+        width: 20px;
+        display: inline-block;
+        font-size: 10px;
+        float: left;
+        line-height: 20px;
+        color: #fff;
+        border-radius: 3px;
+        text-align: center;
+        cursor: pointer;
+        &.edit {
+            background: #3a8ee6;
+        }
+        &.delete {
+            margin-left: 6px;
+            background: red;
+        }
+    }
 }
 </style>

@@ -20,3 +20,4 @@ var urlList = {
 };
 
 export default urlList;
+// module.exports = urlList; 建议用ES6

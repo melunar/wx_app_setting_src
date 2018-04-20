@@ -1,77 +1,68 @@
 <template>
-    <div class="bottom-menu-setting">
-        <radioGroup 
-            v-model="menuType"
-            :labelText="'菜单样式'"
-            :radioArray="menuTypeList" />
-        <colorSelect 
-            :labelText="'默认背景颜色'"
-            v-model="bgColor"
-            :defaultColor="'#fff'" /> 
-        <colorSelect 
-            :labelText="'选中背景颜色'"
-            v-model="activeBgColor"
-            :defaultColor="'#fff'" />
-        <colorSelect 
-            :labelText="'边框颜色'"
-            v-model="lineColor"
-            :defaultColor="'#fff'" />
-        <colorSelect v-if="menuType === 1"
-            :labelText="'默认文字颜色'"
-            v-model="fontColor"
-            :defaultColor="'#666'" />
-        <colorSelect v-if="menuType === 1"
-            :labelText="'选中文字颜色'"
-            v-model="activeFontColor"
-            :defaultColor="'#666'" />
-        <imageUploads 
-            :maxLength="6"
-            :dataList="menuList"
-            :isText="menuType === 1"
-            @change="getNewImages" />
-        <br><br>
-        <el-button @click="consoleOut">输出参数（console）</el-button>
-    </div>
+<div class="bottom-menu-setting">
+    <radioGroup 
+        v-model="menuType"
+        :labelText="'菜单样式'"
+        :radioArray="menuTypeList" />
+    <colorSelect 
+        :labelText="'默认背景颜色'"
+        v-model="bgColor"
+        :defaultColor="'#fff'" /> 
+    <colorSelect 
+        :labelText="'选中背景颜色'"
+        v-model="activeBgColor"
+        :defaultColor="'#fff'" />
+    <colorSelect 
+        :labelText="'边框颜色'"
+        v-model="lineColor"
+        :defaultColor="'#fff'" />
+    <colorSelect v-if="menuType === 1"
+        :labelText="'默认文字颜色'"
+        v-model="fontColor"
+        :defaultColor="'#666'" />
+    <colorSelect v-if="menuType === 1"
+        :labelText="'选中文字颜色'"
+        v-model="activeFontColor"
+        :defaultColor="'#666'" />
+    <imageUploads 
+        :maxLength="6"
+        :dataList="menuList"
+        :isText="menuType === 1"
+        @change="getNewImages" />
+</div>
 </template>
 
 <script>
 import colorSelect from "../_base/color_select.vue";
-import radioGroup from "../_base/radio_group.vue"; 
+import radioGroup from "../_base/radio_group.vue";
 import imageUploads from "../_base/image_upload_list.vue";
 export default {
     name: "bottomMenuSetting",
-    mixins:[],
+    mixins: [],
     props: {
-        /* menuType: {type: Number, default: 1}, //按钮类型
-        bgColor: {type: String, default: "#fff"}, //背景颜色
-        activeBgColor: {type: String, default: "#fff"}, //选中背景色
-        lineColor: {type: String, default: "#fff"}, //边框颜色
-        fontColor: {type: String, default: "#666"},//字体颜色
-        activeFontColor: {type: String, default: "#666"} //激活字体颜色 */
         // 组件id
-        metaId: {type: Number, default: 0 },
+        metaId: { type: Number, default: 0 },
         metaInfo: {
             type: Object,
             default: function() {
-                return { 
+                return {
                     menuType: 1, //按钮类型
                     bgColor: "#fff", //背景颜色
                     activeBgColor: "#fff", //选中背景色
                     lineColor: "#fff", //边框颜色
-                    fontColor: "#666",//字体颜色
-                    activeFontColor: "#666" //激活字体颜色
-                    , menuList: [
-                        {text: "", imgSrc: "", linkPageId: ""},
-                        {text: "", imgSrc: "", linkPageId: ""},
-                        {text: "", imgSrc: "", linkPageId: ""}
+                    fontColor: "#666", //字体颜色
+                    activeFontColor: "#666", //激活字体颜色
+                    menuList: [
+                        { text: "", imgSrc: "", linkPageId: "" },
+                        { text: "", imgSrc: "", linkPageId: "" },
+                        { text: "", imgSrc: "", linkPageId: "" }
                     ]
-                }
+                };
             }
         }
     },
     data: function() {
         return {
-            // metaId: this.metaId,
             metaType: "003",
             metaText: "自定义菜单",
 
@@ -82,15 +73,18 @@ export default {
             fontColor: this.metaInfo.fontColor,
             activeFontColor: this.metaInfo.activeFontColor,
             menuList: this.metaInfo.menuList,
-            
-            menuTypeList: [ //按钮类型列举
+
+            menuTypeList: [
+                //按钮类型列举
                 { value: 1, text: "图片+文字" },
                 { value: 2, text: "图片" }
             ]
         };
     },
     components: {
-        colorSelect, radioGroup, imageUploads
+        colorSelect,
+        radioGroup,
+        imageUploads
         /*requireDemo: function (resolve) {
             require([""], resolve);
         }*/
@@ -100,25 +94,25 @@ export default {
     beforeDestroy: function() {},
     computed: {},
     watch: {
-        "menuType": function() {
+        menuType: function() {
             this.dispatchNewStore();
         },
-        "bgColor": function() {
+        bgColor: function() {
             this.dispatchNewStore();
         },
-        "activeBgColor": function() {
+        activeBgColor: function() {
             this.dispatchNewStore();
         },
-        "lineColor": function() {
+        lineColor: function() {
             this.dispatchNewStore();
         },
-        "fontColor": function() {
+        fontColor: function() {
             this.dispatchNewStore();
         },
-        "activeFontColor": function() {
+        activeFontColor: function() {
             this.dispatchNewStore();
         },
-        "menuList": function() {
+        menuList: function() {
             this.dispatchNewStore();
         }
     },
@@ -136,37 +130,22 @@ export default {
                 bgColor: this.bgColor, //背景颜色
                 activeBgColor: this.activeBgColor, //选中背景色
                 lineColor: this.lineColor, //边框颜色
-                fontColor: this.fontColor,//字体颜色
-                activeFontColor: this.activeFontColor //激活字体颜色
+                fontColor: this.fontColor, //字体颜色
+                activeFontColor: this.activeFontColor, //激活字体颜色
 
-                , menuList: this.menuList
-                /* [  
-                    {text: "消息", imgSrc: "", linkPageId: "#"},
-                    {text: "联系人", imgSrc: "", linkPageId: "#"},
-                    {text: "个人中心", imgSrc: "", linkPageId: "#"},
-                    {text: "个人中心", imgSrc: "", linkPageId: "#"}
-                ] */
+                menuList: this.menuList
             };
             console.log("组件设置变更....");
             this.$store.dispatch("VUEX_SETTING_META", data);
-        },
-        consoleOut: function() {
-           console.group("\/***page setting output");
-           console.log("MenuType = " + this.MenuType);
-           console.log("ActiveBgColor = " + this.ActiveBgColor);
-           console.log("LineColor = " + this.LineColor);
-           console.log("FontColor = " + this.FontColor);
-           console.log("ActiveFontColor = " + this.ActiveFontColor);
-           console.groupEnd("page setting output***\/");
-       }
+        }
     }
-}
+};
 </script>
 
 <style scoped lang="less">
-    //@import "../../../less/variables.less";
-    //@import "../../../less/sprite.less";
-    .bottom-menu-setting {
-        
-    }
+//@import "../../../less/variables.less";
+//@import "../../../less/sprite.less";
+.bottom-menu-setting {
+    position: relative;
+}
 </style>

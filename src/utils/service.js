@@ -1,7 +1,4 @@
-/*  import config from './config'
-import axios from 'axios'
-
-let tconfig = {
+/*let tconfig = {
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'
   }
@@ -22,29 +19,32 @@ export const register = () => {
   return axios.post(config.register)
 }  */
 
-import axios from 'axios';
-// import urlList from "./service_conf.js";
-var urlList = require("./service_conf.js").default;
+import axios from "axios";
+import urlList from "./service_conf.js";
 
 window.SERVICE = function(name, params, successCallback, errorCallback) {
-  var curUrl = urlList[name],
-    method = curUrl.method || "get",
-    isRequestBody = curUrl.isRequestBody || false,
-    url = curUrl.url;
-    if(!url) {
-      console.warn("not config url!!!");
-      return;
+    var curUrl = urlList[name],
+        method = curUrl.method || "get",
+        isRequestBody = curUrl.isRequestBody || false,
+        url = curUrl.url;
+    if (!url) {
+        console.warn("not config url!!!");
+        return;
     }
-    if(method === "get") {
-      axios.get(url, {params: params}).then(function(res) {
-        successCallback(res.data);
-      }).catch(errorCallback);
+    if (method === "get") {
+        axios
+            .get(url, { params: params })
+            .then(function(res) {
+                successCallback(res.data);
+            })
+            .catch(errorCallback);
     }
-    if(method === "post") {
-      axios.post(url, {params: params}).then(function(res) {
-        successCallback(res.data);
-      }).catch(errorCallback);
+    if (method === "post") {
+        axios
+            .post(url, { params: params })
+            .then(function(res) {
+                successCallback(res.data);
+            })
+            .catch(errorCallback);
     }
-}
-
-// export default httpTest;
+};
