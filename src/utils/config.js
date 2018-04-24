@@ -149,6 +149,8 @@ window.message = {
         if (window.messageWithConsoleLog) {
             console.log(message);
         }
+        // TODO: 1231
+        // FIXME:
         window.vueInstance.$message.error(message);
     }
 };

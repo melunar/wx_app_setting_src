@@ -10,13 +10,19 @@ var urlList = {
         url: "/static/mock/page_info.json",
         method: "get",
         isRequestBody: false
-    }
-    /* , metaInfo: {
-        comment: "获取一个组件的信息，包括sort和配置信息",
-        url: "/static/mock/meta_info.json",
-        method: "get",
+    },
+    setIndexPage: {
+        comment: "设置首页页面",
+        url: "http://test/url",
+        method: "post",
         isRequestBody: false
-    } */
+    },
+    savePage: {
+        comment: "保存页面配置",
+        url: "http://test/url",
+        method: "post",
+        isRequestBody: false
+    }
 };
 
 export default urlList;

@@ -34,15 +34,15 @@
 
     <!--右侧按钮-->
     <ul class="navbar-right fr">
-        <span class="normal-btn">
+        <span class="normal-btn hide">
             <i class="fa fa-cog fa-fw btn-pre-icon"></i>
             <span class="btn-text">模板设置</span>
         </span>
-        <span class="normal-btn">
+        <span class="normal-btn hide">
             <i class="fa fa-copy fa-fw btn-pre-icon"></i>
             <span class="btn-text">另存为模板</span>
         </span>
-        <span class="normal-btn">
+        <span class="normal-btn" @click="saveCurPage">
             <i class="fa fa-save fa-fw btn-pre-icon"></i>
             <span class="btn-text">保存页面</span>
         </span>
@@ -91,7 +91,7 @@ export default {
                 }
             }
             this.curMetaPanelStyle = {
-                left: 40 + 80 * index + "px" // todo 优化 大致 居中
+                left: 40 + 80 * index + "px" // TODO: 优化 大致 居中
             };
             // console.log(e.pageX, e.pageY)
         },
@@ -112,6 +112,15 @@ export default {
         //打开、关闭页面配置
         pageSet: function() {
             this.$store.dispatch("VUEX_SETTING_IS_PAGE", true);
+        },
+        // 保存当前页配置
+        saveCurPage: () => {
+            SERVICE("savePage", {}, () => {
+
+            }, () => {
+                message.error("保存失败 code = 2");
+            });
+            this.$store.dispatch("VUEX_IS_TO_SAVE", false);
         }
     }
 };

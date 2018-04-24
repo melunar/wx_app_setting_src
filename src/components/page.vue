@@ -10,8 +10,7 @@
                     }">{{ pageTitle }}</div>
                 <div class="phone-content" 
                     :style="{
-                        'background-color': pageBgColor,
-                        'padding': marginValue + 'px'
+                        'background-color': pageBgColor
                     }" >
                     <div v-if="metasBySort.length === 0" class="phone-empty">
                         您尚未添加任何元素
@@ -111,9 +110,24 @@ export default {
         // 添加的新组件
         vuex_add_meta_info: function() {
             return this.$store.state.system.vuex_add_meta_info;
+        },
+        vuex_page_metas: function() {
+            return this.$store.state.system.vuex_page_metas;
+        },
+        vuex_setting_meta: function() {
+            return this.$store.state.system.vuex_setting_meta;
         }
     },
     watch: {
+        vuex_page_metas: function(val) {
+            console.log("page......");
+            console.log(JSON.parse(JSON.stringify(val)))
+        },
+        vuex_setting_meta: function(val) {
+            console.log("meta......");
+            console.log(JSON.parse(JSON.stringify(val)))
+            this.updateToNewConfig('meta', val)
+        },
         metas: {
             handler: function(vals) {
                 console.log("页面组件刷新");
@@ -135,6 +149,19 @@ export default {
         }
     },
     methods: {
+        updateToNewConfig: function(type, config) {
+            if(type === 'page') {}
+            if(type === 'meta') {
+                var metaId = config.metaId;
+                this.metasBySort.map(
+                function(item, index) {
+                    if(item.metaId === metaId) {
+                        this.metasBySort[index].config = config;
+                    }
+                }.bind(this)
+            );
+            }
+        },
         //删除一个组件
         deleteMeta: function(meta) {
             var metaId = meta.metaId;

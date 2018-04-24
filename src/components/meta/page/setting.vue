@@ -20,11 +20,11 @@
         v-model="PageHeaderColor"
         :labelText="'顶部文字颜色'"
         :radioArray="PageHeaderColorList" />
-    <numberSlider 
+    <!-- <numberSlider 
         v-model="MarginValue"
         :labelText="'页面边距'"
         :tipsText="'px'"
-        :max="20" :min="0" />
+        :max="20" :min="0" /> -->
 </div>
 </template>
 
@@ -114,6 +114,7 @@ export default {
                 marginValue: this.MarginValue
             };
             console.log("页面做了新的设置....");
+            this.$store.dispatch("VUEX_IS_TO_SAVE", true);
             this.$store.dispatch("VUEX_SETTING_PAGE", data);
         }
     }

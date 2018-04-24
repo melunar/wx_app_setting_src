@@ -1,29 +1,29 @@
 <template>
-    <div class="page-manager">
-        <div class="page-list-header">
-          <div class="plh-title">页面
-            <i class="plh-add fa fa-plus" title="新建页面" @click="addNewPage"></i>
-          </div>
-        </div>
-        <div class="page-list-content">
-          <el-table :data="pageListArr" style="width: 100%;height:25">
-            <el-table-column prop="title" label="名称" width="170"></el-table-column>
-            <el-table-column prop="isHomePage" label="首页" width="50">
-              <template slot-scope="scope">
-                <span v-if="scope.row.isHomePage === true" 
-                  class="btn-set-home is-home" @click="setHomePage(scope.row,false)">是</span>
-                <span v-else class="btn-set-home not-home" @click="setHomePage(scope.row,true)">否</span>
-              </template>
-            </el-table-column>
-            <el-table-column label="操作">
-              <template slot-scope="scope">
-                <span class="btn-operate edit fa fa-edit" title="编辑" @click="editPage(scope.row)"></span>
-                <span class="btn-operate delete fa fa-trash" title="删除" @click="deletePage(scope.row)"></span>
-              </template>
-            </el-table-column>
-          </el-table>
+<div class="page-manager">
+    <div class="page-list-header">
+        <div class="plh-title">页面
+        <i class="plh-add fa fa-plus" title="新建页面" @click="addNewPage"></i>
         </div>
     </div>
+    <div class="page-list-content">
+        <el-table :data="pageListArr" style="width: 100%;height:25">
+        <el-table-column prop="title" label="名称" width="170"></el-table-column>
+        <el-table-column prop="isHomePage" label="首页" width="50">
+            <template slot-scope="scope">
+            <span v-if="scope.row.isHomePage === true" 
+                class="btn-set-home is-home" @click="setHomePage(scope.row,false)">是</span>
+            <span v-else class="btn-set-home not-home" @click="setHomePage(scope.row,true)">否</span>
+            </template>
+        </el-table-column>
+        <el-table-column label="操作">
+            <template slot-scope="scope">
+            <span class="btn-operate edit fa fa-edit" title="编辑" @click="editPage(scope.row)"></span>
+            <span class="btn-operate delete fa fa-trash" title="删除" @click="deletePage(scope.row)"></span>
+            </template>
+        </el-table-column>
+        </el-table>
+    </div>
+</div>
 </template>
 
 <script>
@@ -84,16 +84,28 @@ export default {
             this.pageListArr.push(newPageObj);
         },
         setHomePage: function(row, flag) {
-            var length = this.pageListArr.length;
-            for (var i = 0; i < length; i++) {
-                if (this.pageListArr[i].id === row.id) {
-                    this.pageListArr[i].isHomePage = true;
-                } else {
-                    this.pageListArr[i].isHomePage = false;
+            var pageId = row.id;
+            SERVICE("setIndexPage", {id: pageId}, (res) => {
+                for (var i = 0; i < length; i++) {
+                    if (this.pageListArr[i].id === pageId) {
+                        this.pageListArr[i].isHomePage = true;
+                    } else {
+                        this.pageListArr[i].isHomePage = false;
+                    }
                 }
+                message.success("设置主页成功！");
+            }, (res) => {
+                message.error("设置主页失败 code = 2");
+            });
+        },
+        // 保存页面
+        savePage: function() { 
+            if(this.$store.state.system.vuex_is_to_save) {
+                message.info("保存页面...");
             }
         },
         editPage: function(row) {
+            this.savePage();
             var id = row.id;
             this.getPageInfo(id, true);
         },
