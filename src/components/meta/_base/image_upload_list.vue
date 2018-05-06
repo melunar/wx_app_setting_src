@@ -28,9 +28,9 @@
                         </template>
                     </el-input>
                     <span class="split-space"></span>
-                    <el-input size="small" disabled placeholder="链接地址" v-model="item.linkPageId">
+                    <el-input size="small" disabled placeholder="链接地址" v-model="item.linkPageName">
                         <template slot="append">
-                                <el-button size="small" type="primary">链接地址</el-button>
+                            <el-button @click="selectLink(index)" size="small" type="primary">链接地址</el-button>
                         </template>
                     </el-input>
                     <template v-if="isText">
@@ -55,6 +55,9 @@
             @click="addOne"
         >添加一个（拖拽排序）{{ listBySort.length >= maxLength ? "已达上限" : "" }}</el-button>
     </div>
+    <linkSelect v-if="isLinkSelectShow" 
+        :linkId="listBySort[curIndex].linkPageId"
+        @link="recieveLink" @close="isLinkSelectShow = false"/>
 </div>
 </template>
 
@@ -69,8 +72,8 @@ export default {
             type: Array,
             default: function() {
                 return [
-                    { imgSrc: "", linkPageId: "", text: "1" },
-                    { imgSrc: "", linkPageId: "", text: "2" }
+                    { imgSrc: "", linkPageId: "", linkPageName: "", text: "1" },
+                    { imgSrc: "", linkPageId: "", linkPageName: "", text: "2" }
                 ];
             }
         },
@@ -82,14 +85,16 @@ export default {
     data: function() {
         return {
             listBySort: this.dataList,
-            actionUrl: GC.uploadImgUrl
+            actionUrl: GC.uploadImgUrl,
+
+            isLinkSelectShow: false //是否显示链接选择面板
         };
     },
     components: {
-        draggable
-        /*requireDemo: function (resolve) {
-            require([""], resolve);
-        }*/
+        draggable,
+        linkSelect: function (resolve) {
+            require(["./link_select.vue"], resolve);
+        }
     },
     created: function() {},
     mounted: function() {},
@@ -102,19 +107,20 @@ export default {
             this.listBySort.splice(this.listBySort.length, 0, {
                 imgSrc: "",
                 linkPageId: "",
+                linkPageName: "",
                 text: ""
             });
             this.$emit("change", this.listBySort);
         },
         // 删除一项
         deleteOne: function(item, index) {
-            this.$alert("确定要删除该项？", "提示", {
+            this.$confirm("确定要删除该项？", "提示", {
                 confirmButtonText: "删除",
-                callback: function() {
+                cancelButtonText: '取消',
+                type: "warning"}).then(() => {
                     this.listBySort.splice(index, 1);
                     this.$emit("change", this.listBySort);
-                }.bind(this)
-            });
+                }).catch(()=>{}); 
         },
         handleRemove: function(file, fileList) {
             console.log("....handleRemove");
@@ -167,6 +173,16 @@ export default {
         rememberIndex: function(index) {
             this.curIndex = index;
             console.log(`当前操作NO.${index}`);
+        },
+        // 打开选择链接面板
+        selectLink(index) {
+            this.isLinkSelectShow = true;
+            this.rememberIndex(index);
+        },
+        // 更新链接
+        recieveLink(id, name) {
+            this.listBySort[this.curIndex].linkPageId = id;
+            this.listBySort[this.curIndex].linkPageName = name;
         }
     },
     filters: {}

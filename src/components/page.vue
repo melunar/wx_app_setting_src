@@ -122,12 +122,12 @@ export default {
     watch: {
         vuex_page_metas: function(val) {
             console.log("page......");
-            console.log(JSON.parse(JSON.stringify(val)))
+            console.log(JSON.parse(JSON.stringify(val)));
         },
         vuex_setting_meta: function(val) {
             console.log("meta......");
-            console.log(JSON.parse(JSON.stringify(val)))
-            this.updateToNewConfig('meta', val)
+            console.log(JSON.parse(JSON.stringify(val)));
+            this.updateToNewConfig("meta", val);
         },
         metas: {
             handler: function(vals) {
@@ -153,9 +153,10 @@ export default {
         // 获取所有组件的配置及基本信息
         getMetaInfo() {
             let metaLe = this.$refs.pageMeta.length;
-            let metaInfo = null, metaOriginInfo = null;
+            let metaInfo = null,
+                metaOriginInfo = null;
             let metas = [];
-            for(let i = 0; i < metaLe; i++) {
+            for (let i = 0; i < metaLe; i++) {
                 metaOriginInfo = this.$refs.pageMeta[i].getInfo();
                 metaInfo = {
                     metaId: metaOriginInfo.metaId,
@@ -171,16 +172,17 @@ export default {
             return metas;
         },
         updateToNewConfig: function(type, config) {
-            if(type === 'page') {}
-            if(type === 'meta') {
+            if (type === "page") {
+            }
+            if (type === "meta") {
                 var metaId = config.metaId;
                 this.metasBySort.map(
-                function(item, index) {
-                    if(item.metaId === metaId) {
-                        this.metasBySort[index].config = config;
-                    }
-                }.bind(this)
-            );
+                    function(item, index) {
+                        if (item.metaId === metaId) {
+                            this.metasBySort[index].config = config;
+                        }
+                    }.bind(this)
+                );
             }
         },
         //删除一个组件
@@ -188,39 +190,32 @@ export default {
             var metaId = meta.metaId;
             var metaType = meta.metaType;
             var metaName = GC.metaListMap[metaType].name;
-            this.metasBySort.map(
-                function(item, index) {
-                    if (metaId === item.metaId) {
-                        this.$alert(
-                            "确定要删除该" + metaName + "组件？",
-                            "提示",
-                            {
-                                confirmButtonText: "删除",
-                                callback: function() {
-                                    this.metasBySort.splice(index, 1); // 删除
-                                    this.reSortMetas(); // 重拍
-                                    if (
-                                        this.$store.state.system
-                                            .vuex_setting_meta &&
-                                        this.$store.state.system
-                                            .vuex_setting_meta.metaId ===
-                                            metaId &&
-                                        !this.$store.state.system
-                                            .vuex_setting_is_page
-                                    ) {
-                                        //删除的是当前正在编辑的组件 触发到页面编辑上
-                                        console.log("删除....切换到页面配置");
-                                        this.$store.dispatch(
-                                            "VUEX_SETTING_IS_PAGE",
-                                            true
-                                        );
-                                    }
-                                }.bind(this)
-                            }
-                        );
-                    }
-                }.bind(this)
-            );
+            this.metasBySort.map((item, index) => {
+                if (metaId === item.metaId) {
+                    this.$confirm(
+                        "确定要删除该" + metaName + "组件？",
+                        "提示",
+                        {
+                            confirmButtonText: "删除",
+                            cancelButtonText: "取消",
+                            type: "warning"
+                        }
+                    ).then(() => {
+                        this.metasBySort.splice(index, 1); // 删除
+                        this.reSortMetas(); // 重拍
+                        if (
+                            this.$store.state.system.vuex_setting_meta &&
+                            this.$store.state.system.vuex_setting_meta
+                                .metaId === metaId &&
+                            !this.$store.state.system.vuex_setting_is_page
+                        ) {
+                            //删除的是当前正在编辑的组件 触发到页面编辑上
+                            console.log("删除....切换到页面配置");
+                            this.$store.dispatch("VUEX_SETTING_IS_PAGE", true);
+                        }
+                    });
+                }
+            });
         },
         //拖拽排序
         draggableSort: function(e) {
