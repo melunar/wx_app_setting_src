@@ -27,11 +27,12 @@
                             @clone="draggableClone" -->
                         <draggable v-model="metasBySort" @sort="draggableSort"> 
                             <component :is="componentId" 
-                            v-for="(item, index) in metasBySort" :key="index"
-                            :metaId="item.metaId"
-                            :metaType="item.type"
-                            :metaConfig="item.config"
-                            @delMeta="deleteMeta" />
+                                ref="pageMeta"
+                                v-for="(item, index) in metasBySort" :key="index"
+                                :metaId="item.metaId"
+                                :metaType="item.type"
+                                :metaConfig="item.config"
+                                @delMeta="deleteMeta" />
                         </draggable>
                     </div>
                 </div>
@@ -149,6 +150,26 @@ export default {
         }
     },
     methods: {
+        // 获取所有组件的配置及基本信息
+        getMetaInfo() {
+            let metaLe = this.$refs.pageMeta.length;
+            let metaInfo = null, metaOriginInfo = null;
+            let metas = [];
+            for(let i = 0; i < metaLe; i++) {
+                metaOriginInfo = this.$refs.pageMeta[i].getInfo();
+                metaInfo = {
+                    metaId: metaOriginInfo.metaId,
+                    // sort: 0,
+                    type: metaOriginInfo.metaType,
+                    text: metaOriginInfo.metaText,
+                    name: metaOriginInfo.metaName,
+                    config: metaOriginInfo.config
+                };
+                metaInfo.sort = i;
+                metas.push(metaInfo);
+            }
+            return metas;
+        },
         updateToNewConfig: function(type, config) {
             if(type === 'page') {}
             if(type === 'meta') {

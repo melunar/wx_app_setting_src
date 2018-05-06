@@ -27,6 +27,9 @@ export default {
     },
     data: function() {
         return {
+            metaType: "001",
+            metaText: "富文本",
+            metaName: "richText",
             metaInfo: this.metaConfig
         };
     },
@@ -40,7 +43,9 @@ export default {
     beforeDestroy: function() {},
     computed: {},
     watch: {},
-    methods: {}
+    methods: {
+        
+    }
 };
 </script>
 

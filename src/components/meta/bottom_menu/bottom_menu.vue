@@ -60,6 +60,10 @@ export default {
     data: function() {
         return {
             activeIndex: 0, //当前选中索引,
+            
+            metaType: "003",
+            metaText: "自定义菜单",
+            metaName: "bottomMenu",
             metaInfo: this.metaConfig
         };
     },

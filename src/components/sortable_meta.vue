@@ -2,9 +2,9 @@
 <div class="sort-meta-unit">
     <div v-if="metaId">
         <!-- 带有配置的组件 -->
-        <component v-if="!!metaConfig" :is="componentId" :metaId="metaId" :metaConfig="metaConfig"></component>
+        <component ref="meta" v-if="!!metaConfig" :is="componentId" :metaId="metaId" :metaConfig="metaConfig"></component>
         <!-- 首次添加没有配置的组件 -->
-        <component v-if="!metaConfig" :is="componentId" :metaId="metaId" />
+        <component ref="meta" v-if="!metaConfig" :is="componentId" :metaId="metaId" />
     </div>
     <div v-if="!metaId" style="height: 100px; background: chocolate;">
         {{"test " + metaName }}
@@ -84,6 +84,10 @@ export default {
     },
     watch: {},
     methods: {
+        // 输出: 配置等基本信息
+        getInfo() {
+            return this.$refs.meta.getInfo();
+        },
         // 编辑当前组件
         setEditStatus: function() {
             if (

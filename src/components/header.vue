@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import pageController from "@/components/js/save_page.js";
 export default {
     name: "pageHeader",
     data: function() {
@@ -115,12 +116,7 @@ export default {
         },
         // 保存当前页配置
         saveCurPage: () => {
-            SERVICE("savePage", {}, () => {
-
-            }, () => {
-                message.error("保存失败 code = 2");
-            });
-            this.$store.dispatch("VUEX_IS_TO_SAVE", false);
+            pageController.savePage();
         }
     }
 };

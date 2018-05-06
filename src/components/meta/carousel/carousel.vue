@@ -39,6 +39,9 @@ export default {
     },
     data: function() {
         return {
+            metaType: "002",
+            metaText: "轮播图",
+            metaName: "carousel",
             metaInfo: this.metaConfig
         };
     },
