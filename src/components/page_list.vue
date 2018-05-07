@@ -41,25 +41,41 @@ export default {
         }*/
     },
     created: function() {
-        this.getPageList();
+        setTimeout(() => {
+            this.getPageList();
+        },100);
     },
     mounted: function() {},
     beforeDestroy: function() {},
     computed: {},
     watch: {},
     methods: {
+        // 从路由获取唯一标识
+        getParam() {
+            // 模拟 /#/?id=1能取到模拟数据 否则取到空
+            var param = this.$route.query;
+            if(!param || !param.id) { // 校验参数 TODO:
+                message.error("无法获取 code = 1");
+                return 0;
+            }
+            return { // TODO:
+                id: param.id
+            };
+        },
         //获取当前模板的页面列表
-        getPageList: function() {
-            var param = null;
+        getPageList() {
+            var param = this.getParam();
+            if(!param) { return; }
+            var urlFixed = param.id == 1 ? "" : "0";
             SERVICE(
-                "templatePagesList",
+                "templatePagesList" + urlFixed,
                 param,
-                function(res) {
+                (res) => {
                     this.pageListArr = res.data;
                     if (res.data && res.data.forEach && res.data.length) {
                         this.getPageInfo(0); //激活第一个页面
                     }
-                }.bind(this)
+                }
             );
         },
         //获取页面的所有信息
@@ -67,20 +83,25 @@ export default {
             var param = {
                 id: isId ? index : this.pageListArr[index].id
             };
+            var urlFixed = Math.random() > 0.5 ? "0" : "";
             SERVICE(
-                "pageInfo",
+                "pageInfo" + urlFixed,
                 param,
                 function(res) {
                     this.setCurPageStore(res.data);
                 }.bind(this)
             );
         },
+        // 添加新页面
         addNewPage: function() {
+            var isHomePage = !this.pageListArr.length;
             var newPageObj = {
                 id: new Date().getTime(),
                 title: "未命名页面",
-                isHomePage: false
+                isHomePage: isHomePage
             };
+            // TODO: service
+            // 成功之后添加本地数据或刷新页面
             this.pageListArr.push(newPageObj);
         },
         setHomePage: function(row, flag) {
@@ -104,11 +125,13 @@ export default {
                 message.info("保存页面...");
             }
         },
+        // 编辑当前点击页面
         editPage: function(row) {
             this.savePage();
             var id = row.id;
             this.getPageInfo(id, true);
         },
+        // 删除页面
         deletePage: function(row) {
             var length = this.pageListArr.length;
             for (var i = 0; i < length; i++) {

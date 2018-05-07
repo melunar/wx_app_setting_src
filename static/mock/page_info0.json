@@ -1,0 +1,15 @@
+{
+    "data": {
+        "config": {
+            "id": 543234523,
+            "pageName": "未命名页面",
+            "pageTitle": "未命名标题",
+            "pageBgColor": "#eee",
+            "pageBgColorDefault": "#fff",
+            "pageHeaderBgColor": "#fff",
+            "pageHeaderBgColorDefault": "#fff",
+            "pageHeaderColor": 1
+        },
+        "metas": []
+    }
+}

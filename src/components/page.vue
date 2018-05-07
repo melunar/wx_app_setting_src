@@ -44,6 +44,7 @@
 
 <script>
 import draggable from "vuedraggable";
+import pageController from "@/components/js/save_page.js";
 export default {
     name: "appModel",
     mixins: [],
@@ -53,7 +54,7 @@ export default {
             type: Array,
             default: function() {
                 return [
-                    { name: "carousel", id: new Date().getTime() },
+                    /* { name: "carousel", id: new Date().getTime() },
                     { name: "bottomMenu", id: new Date().getTime() + 1000 },
                     {
                         metaId: 3434345,
@@ -71,7 +72,7 @@ export default {
                         }
                     },
                     { name: "number4" },
-                    { name: "number5" }
+                    { name: "number5" } */
                 ];
             }
         },
@@ -147,6 +148,7 @@ export default {
                 config: null
             };
             this.metasBySort.splice(this.metasBySort.length, 0, newMeta);
+            this.savePage();
         }
     },
     methods: {
@@ -213,6 +215,7 @@ export default {
                             console.log("删除....切换到页面配置");
                             this.$store.dispatch("VUEX_SETTING_IS_PAGE", true);
                         }
+                        this.savePage();
                     });
                 }
             });
@@ -223,6 +226,7 @@ export default {
             //console.log("-----          oldIndex：" + e.oldIndex);
             console.log("----- 拖拽重排");
             this.reSortMetas();
+            this.savePage();
         },
         //拖拽排序 end
 
@@ -233,6 +237,11 @@ export default {
                     this.metasBySort[index].sort = index;
                 }.bind(this)
             );
+        },
+        savePage() {
+            this.$nextTick(() => {
+                pageController.savePage();
+            });
         }
     }
 };
