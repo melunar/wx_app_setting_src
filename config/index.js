@@ -48,6 +48,13 @@ module.exports = {
             		'^/gateway': '/'
             	}
             } */
+            '/api':{
+            	target: 'http://localhost:3000/api',
+                changeOrigin: true //允许跨域 或者使用nginx代理实现跨域
+            	, pathRewrite: {
+            		'^/api': '/'
+            	}
+            }
     } 
   },
 

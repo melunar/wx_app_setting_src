@@ -40,8 +40,10 @@ window.SERVICE = function(name, params, successCallback, errorCallback) {
             .catch(errorCallback);
     }
     if (method === "post") {
+        debugger
+        // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
         axios
-            .post(url, { params: params })
+            .post(url, params, {headers:{'Content-Type':'application/x-www-form-urlencoded'}}) //text/plain;charset=UTF-8
             .then(function(res) {
                 successCallback(res.data);
             })

@@ -98,9 +98,14 @@ export default {
             var newPageObj = {
                 id: new Date().getTime(),
                 title: "未命名页面",
-                isHomePage: isHomePage
+                isHomePage: isHomePage,
+                config: "{}",
+                fromId: "0001"
             };
             // TODO: service
+            SERVICE("addPage", newPageObj, function(res) {
+                debugger
+            });
             // 成功之后添加本地数据或刷新页面
             this.pageListArr.push(newPageObj);
         },

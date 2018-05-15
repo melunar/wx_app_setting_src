@@ -1,4 +1,5 @@
-var urlList = {
+var gateway = 'api', 
+urlList = {
     templatePagesList: { // demo 有数据
         comment: "根据模板获取所有页面",
         url: "/static/mock/pages_in_template.json",
@@ -34,7 +35,13 @@ var urlList = {
         url: "http://test/url",
         method: "post",
         isRequestBody: false
-    }
+    },
+    addPage: {
+        comment: "添加一个页面",
+        url: `${gateway}/page/add`,
+        method: "post",
+        isRequestBody: false
+    },
 };
 
 export default urlList;
