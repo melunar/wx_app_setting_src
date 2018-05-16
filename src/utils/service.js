@@ -20,33 +20,41 @@ export const register = () => {
 }  */
 
 import axios from "axios";
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'; 
+
 import urlList from "./service_conf.js";
 
 window.SERVICE = function(name, params, successCallback, errorCallback) {
     var curUrl = urlList[name],
-        method = curUrl.method || "get",
+        method = (curUrl.method || "get").toLowerCase(),
         isRequestBody = curUrl.isRequestBody || false,
         url = curUrl.url;
     if (!url) {
-        console.warn("not config url!!!");
+        console.warn("未找到请求地址,请核实url...");
         return;
     }
     if (method === "get") {
         axios
             .get(url, { params: params })
-            .then(function(res) {
-                successCallback(res.data);
+            .then((res) => {
+                if(res.code !== 200) {
+                    message.error(res.message || "请求异常...");
+                } else successCallback(res.data);
             })
-            .catch(errorCallback);
+            .catch((e) => {
+                message.error('请求失败...');
+            });
     }
     if (method === "post") {
-        debugger
-        // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-        axios
-            .post(url, params, {headers:{'Content-Type':'application/x-www-form-urlencoded'}}) //text/plain;charset=UTF-8
-            .then(function(res) {
-                successCallback(res.data);
+        axios.post(url, params)
+            .then(function(response) {
+                var res = response.data;
+                if(res.code !== 200) {
+                    message.error(res.message || "请求异常...");
+                } else successCallback(res.data);
             })
-            .catch(errorCallback);
+            .catch((e) => {
+                message.error('请求失败...');
+            });
     }
 };

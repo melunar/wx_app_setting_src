@@ -36,6 +36,13 @@ urlList = {
         method: "post",
         isRequestBody: false
     },
+    // 模拟服务器接口
+    getPagesByWxApp: { // demo 有数据
+        comment: "根据小程序ID获取所有页面",
+        url: `${gateway}/page/getByApp`,
+        method: "post",
+        isRequestBody: false
+    },
     addPage: {
         comment: "添加一个页面",
         url: `${gateway}/page/add`,

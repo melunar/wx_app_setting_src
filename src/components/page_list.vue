@@ -52,27 +52,29 @@ export default {
     methods: {
         // 从路由获取唯一标识
         getParam() {
-            // 模拟 /#/?id=1能取到模拟数据 否则取到空
+            // 模拟 /#/?id=0001能取到模拟数据 否则取到空
             var param = this.$route.query;
             if(!param || !param.id) { // 校验参数 TODO:
                 message.error("无法获取 code = 1");
                 return 0;
             }
             return { // TODO:
-                id: param.id
+                wxAppId: param.id
             };
         },
         //获取当前模板的页面列表
         getPageList() {
             var param = this.getParam();
             if(!param) { return; }
-            var urlFixed = param.id == 1 ? "" : "0";
+            // var urlFixed = param.id == 1 ? "" : "0";
             SERVICE(
-                "templatePagesList" + urlFixed,
+                // "templatePagesList" + urlFixed,
+                "getPagesByWxApp",
                 param,
                 (res) => {
-                    this.pageListArr = res.data;
-                    if (res.data && res.data.forEach && res.data.length) {
+                    debugger
+                    this.pageListArr = res;
+                    if (res && res.forEach && res.length) {
                         this.getPageInfo(0); //激活第一个页面
                     }
                 }
@@ -100,7 +102,7 @@ export default {
                 title: "未命名页面",
                 isHomePage: isHomePage,
                 config: "{}",
-                fromId: "0001"
+                wxAppId: "0001"
             };
             // TODO: service
             SERVICE("addPage", newPageObj, function(res) {
